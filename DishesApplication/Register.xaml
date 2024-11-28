@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DishesApplication"
         mc:Ignorable="d"
-                Title="Register" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinHeight="550" MinWidth="800">
-    <Grid MouseDown="Grid_MouseDown">
+                Title="Register" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinHeight="550" MinWidth="800" MouseDown="Window_MouseDown">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="13*"/>
             <ColumnDefinition Width="27*"/>
