@@ -15,13 +15,21 @@ using System.Windows.Shapes;
 namespace DishesApplication
 {
     /// <summary>
-    /// Логика взаимодействия для Logged_in.xaml
+    /// Логика взаимодействия для ProductRedactForm.xaml
     /// </summary>
-    public partial class Logged_in : Window
+    public partial class ProductRedactForm : Window
     {
-        public Logged_in()
+        public ProductRedactForm()
         {
             InitializeComponent();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
     }
 }

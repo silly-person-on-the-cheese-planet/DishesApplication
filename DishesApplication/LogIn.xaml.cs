@@ -23,5 +23,24 @@ namespace DishesApplication
         {
             InitializeComponent();
         }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
+            Register register = new(); register.Show();
+            CatalogAuthorized catalogAuthorized = new(); catalogAuthorized.Show();
+            CatalogNonAuthorized catalogNonAuthorized = new(); catalogNonAuthorized.Show();
+            CatalogAdministrator catalogAdministrator = new(); catalogAdministrator.Show();
+            BasketForm basketForm = new(); basketForm.Show();
+            ProductAddForm productAddForm = new(); productAddForm.Show();
+            ProductRedactForm productRedactForm = new(); productRedactForm.Show();
+        }
     }
 }
