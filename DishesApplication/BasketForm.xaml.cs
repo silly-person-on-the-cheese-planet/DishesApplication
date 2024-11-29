@@ -31,5 +31,15 @@ namespace DishesApplication
                 DragMove();
             }
         }
+
+        private void CancelOrder_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+
+        private void OrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult= true;
+        }
     }
 }

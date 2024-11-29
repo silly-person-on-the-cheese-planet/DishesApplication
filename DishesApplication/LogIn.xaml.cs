@@ -34,14 +34,15 @@ namespace DishesApplication
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
-            Register register = new(); register.Show();
+            
             CatalogAuthorized catalogAuthorized = new(); catalogAuthorized.Show();
-            CatalogNonAuthorized catalogNonAuthorized = new(); catalogNonAuthorized.Show();
-            CatalogAdministrator catalogAdministrator = new(); catalogAdministrator.Show();
-            BasketForm basketForm = new(); basketForm.Show();
-            ProductAddForm productAddForm = new(); productAddForm.Show();
-            ProductRedactForm productRedactForm = new(); productRedactForm.Show();
-            ProductCardForm productCardForm = new(); productCardForm.Show();
+            CatalogAdministrator catalogAdministrator = new(); catalogAdministrator.Show(); Close();
+            
+        }
+
+        private void RegButton_Click(object sender, RoutedEventArgs e)
+        {
+            Register register = new(); register.Show(); Close();
         }
     }
 }

@@ -57,7 +57,7 @@
 
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <Button x:Name="LogInButton" Width="150" Height="35" VerticalAlignment="Top" Margin="160 50 20 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF76E383" FontSize="18" Click="LogInButton_Click">Авторизация</Button>
-                <Button x:Name="RegButton" Width="180" Height="35" VerticalAlignment="Top" Margin="0 50 70 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF4B8C4F" FontSize="18">Регистрация</Button>
+                <Button x:Name="RegButton" Width="180" Height="35" VerticalAlignment="Top" Margin="0 50 70 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF4B8C4F" FontSize="18" Click="RegButton_Click">Регистрация</Button>
 
             </StackPanel>
         </Grid>

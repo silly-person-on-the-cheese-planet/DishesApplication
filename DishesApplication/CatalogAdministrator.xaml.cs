@@ -31,5 +31,20 @@ namespace DishesApplication
                 DragMove();
             }
         }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ProductAddForm productAddForm = new(); productAddForm.ShowDialog();
+        }
+
+        private void Image_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+            ProductRedactForm productRedactForm = new(); productRedactForm.ShowDialog();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LogIn logIn = new(); logIn.Show(); Close();
+        }
     }
 }

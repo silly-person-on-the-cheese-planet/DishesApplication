@@ -31,5 +31,15 @@ namespace DishesApplication
                 DragMove();
             }
         }
+
+        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+
+        private void RegButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
     }
 }

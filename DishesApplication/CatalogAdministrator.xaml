@@ -35,7 +35,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1" Margin="40,0,40,0">
-                <Button Width="100" Height="30" FontSize="17" Foreground="#FFFFFF" Background="#FF76E383" BorderThickness="2.5" BorderBrush="#FF4B8C4F">Выход</Button>
+                <Button Width="100" Height="30" FontSize="17" Foreground="#FFFFFF" Background="#FF76E383" BorderThickness="2.5" BorderBrush="#FF4B8C4F" Click="Button_Click">Выход</Button>
             </StackPanel>
         </Grid>
 
@@ -43,7 +43,7 @@
             <Border BorderBrush="#FF4B8C4F" BorderThickness="2,0,2,2"/>
 
             <Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Margin="2">
-                <Image Source="/icon-plus.png" />
+                <Image Source="/icon-plus.png" MouseDown="Image_MouseDown" />
             </Border>
 
             <StackPanel Orientation="Horizontal" Margin="20,10,20,10">
@@ -92,7 +92,7 @@
                                 </Border>
 
                                 <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" />
+                                    <Image Source="/icon-magnifier.png" MouseDown="Image_MouseDown_1" />
                                 </Border>
                             </StackPanel>
                         </Grid>

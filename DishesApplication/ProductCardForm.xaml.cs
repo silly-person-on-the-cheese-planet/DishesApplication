@@ -31,5 +31,10 @@ namespace DishesApplication
                 DragMove();
             }
         }
+
+        private void Window_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }

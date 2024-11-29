@@ -31,5 +31,15 @@ namespace DishesApplication
                 DragMove();
             }
         }
+
+        private void RegButton_Click(object sender, RoutedEventArgs e)
+        {
+            CatalogAuthorized catalogAuthorized = new(); catalogAuthorized.Show(); Close();
+        }
+
+        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
+            CatalogNonAuthorized catalogNonAuthorized = new(); catalogNonAuthorized.Show(); Close();
+        }
     }
 }

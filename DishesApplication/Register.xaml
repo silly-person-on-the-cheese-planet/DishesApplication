@@ -64,8 +64,8 @@
             </Grid>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Height="35">
-                <Button x:Name="RegButton" Width="180" Height="35" Margin="160 0 20 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF76E383" FontSize="18">Зарегистрироваться</Button>
-                <Button x:Name="LogInButton" Width="150" Height="35" Margin="0 0 70 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF4B8C4F" FontSize="18">Войти как Гость</Button>
+                <Button x:Name="RegButton" Width="180" Height="35" Margin="160 0 20 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF76E383" FontSize="18" Click="RegButton_Click">Зарегистрироваться</Button>
+                <Button x:Name="LogInButton" Width="150" Height="35" Margin="0 0 70 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF4B8C4F" FontSize="18" Click="LogInButton_Click">Войти как Гость</Button>
             </StackPanel>
         </Grid>
     </Grid>
