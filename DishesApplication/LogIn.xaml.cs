@@ -41,6 +41,7 @@ namespace DishesApplication
             BasketForm basketForm = new(); basketForm.Show();
             ProductAddForm productAddForm = new(); productAddForm.Show();
             ProductRedactForm productRedactForm = new(); productRedactForm.Show();
+            ProductCardForm productCardForm = new(); productCardForm.Show();
         }
     }
 }
