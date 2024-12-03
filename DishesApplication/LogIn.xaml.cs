@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using Microsoft.Data.SqlClient;
 
 namespace DishesApplication
@@ -8,6 +13,8 @@ namespace DishesApplication
     public partial class LogIn : Window
     {
         private string connectionString = "Server=desktop-uijbk3u;Database=My;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;";
+        private bool captchaRequired = false;
+        private string captchaText;
 
         public LogIn()
         {
@@ -22,10 +29,20 @@ namespace DishesApplication
             }
         }
 
-        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        private async void LogInButton_Click(object sender, RoutedEventArgs e)
         {
             string login = UserLoginTextBox.Text;
             string password = UserPasswordBox.Password;
+
+            if (captchaRequired)
+            {
+                if (CaptchaTextBox.Text != captchaText)
+                {
+                    MessageBox.Show("Неверная CAPTCHA. Ожидалось: " + captchaText, "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
+                    await Task.Delay(10000); // Блокировка на 10 секунд
+                    return;
+                }
+            }
 
             if (AuthenticateUser(login, password))
             {
@@ -38,7 +55,19 @@ namespace DishesApplication
             }
             else
             {
-                MessageBox.Show("Неверный логин или пароль.", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (!captchaRequired)
+                {
+                    captchaRequired = true;
+                    GenerateCaptcha();
+                    CaptchaLabel.Visibility = Visibility.Visible;
+                    CaptchaTextBox.Visibility = Visibility.Visible;
+                    CaptchaBorder.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логин или пароль.", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
+                    await Task.Delay(10000); // Блокировка на 10 секунд
+                }
             }
         }
 
@@ -199,6 +228,49 @@ namespace DishesApplication
             CatalogNonAuthorized catalogNonAuthorized = new CatalogNonAuthorized();
             catalogNonAuthorized.Show();
             Close();
+        }
+
+        private void GenerateCaptcha()
+        {
+            Random random = new Random();
+            captchaText = new string(Enumerable.Range(0, 4).Select(i => random.Next(0, 2) == 0 ? (char)random.Next('0', '9' + 1) : (char)random.Next('A', 'Z' + 1)).ToArray());
+
+            CaptchaCanvas.Children.Clear();
+
+            double xOffset = 0;
+            double yOffset = 0;
+
+            for (int i = 0; i < captchaText.Length; i++)
+            {
+                TextBlock textBlock = new TextBlock
+                {
+                    Text = captchaText[i].ToString(),
+                    FontSize = 24,
+                    Foreground = new SolidColorBrush(Colors.Black),
+                    Margin = new Thickness(0, 0, 0, 80) // Добавление отступов, чтобы символы не выходили за границы
+                };
+
+                Canvas.SetLeft(textBlock, xOffset);
+                Canvas.SetTop(textBlock, yOffset + random.Next(-5, 0)); // Смещение по вертикали для создания эффекта волны
+                CaptchaCanvas.Children.Add(textBlock);
+
+                xOffset += 25; // Смещение по горизонтали для следующего символа
+            }
+
+            // Добавление графического шума
+            for (int j = 0; j < 30; j++)
+            {
+                Line line = new Line
+                {
+                    Stroke = new SolidColorBrush(Colors.Gray),
+                    X1 = random.Next(0, (int)CaptchaCanvas.Width),
+                    Y1 = random.Next(0, (int)CaptchaCanvas.Height),
+                    X2 = random.Next(0, (int)CaptchaCanvas.Width),
+                    Y2 = random.Next(0, (int)CaptchaCanvas.Height),
+                    StrokeThickness = 1
+                };
+                CaptchaCanvas.Children.Add(line);
+            }
         }
     }
 }
