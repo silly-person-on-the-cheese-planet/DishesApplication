@@ -40,10 +40,10 @@
             <Border BorderBrush="#FF4B8C4F" BorderThickness="2,0,2,2"/>
 
             <StackPanel Orientation="Horizontal" Margin="20,10,20,10">
-                <TextBox Text="Поиск нужного товара" Foreground="Gray" Width="250" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" />
+                <TextBox x:Name="ProductFindTextBox" Text="Поиск нужного товара" Foreground="Gray" Width="250" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" GotFocus="ProductFindTextBox_GotFocus" LostFocus="ProductFindTextBox_LostFocus" />
                 <Image Source="/icon-magnifier.png" Width="30" Height="30" />
 
-                <TextBox Margin="10,0,0,0" Text="Категория" Foreground="Gray" Width="200" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5"/>
+                <TextBox x:Name="CategoryFindTextBox" Margin="10,0,0,0" Text="Категория" Foreground="Gray" Width="200" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" GotFocus="CategoryFindTextBox_GotFocus" LostFocus="CategoryFindTextBox_LostFocus"/>
                 <Image Source="/icon-magnifier.png" Width="30" Height="30"/>
             </StackPanel>
 

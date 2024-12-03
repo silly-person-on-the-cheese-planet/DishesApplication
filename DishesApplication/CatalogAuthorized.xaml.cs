@@ -62,5 +62,41 @@ namespace DishesApplication
                 DragMove();
             }
         }
+
+        private void CategoryFindTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (CategoryFindTextBox.Text == "Категория" && CategoryFindTextBox.Foreground == Brushes.Gray)
+            {
+                CategoryFindTextBox.Text = "";
+                CategoryFindTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void CategoryFindTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (CategoryFindTextBox.Text == "")
+            {
+                CategoryFindTextBox.Foreground = Brushes.Gray;
+                CategoryFindTextBox.Text = "Категория";
+            }
+        }
+
+        private void ProductFindTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (ProductFindTextBox.Text == "Поиск нужного товара" && ProductFindTextBox.Foreground == Brushes.Gray)
+            {
+                ProductFindTextBox.Text = "";
+                ProductFindTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void ProductFindTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (ProductFindTextBox.Text == "")
+            {
+                ProductFindTextBox.Foreground = Brushes.Gray;
+                ProductFindTextBox.Text = "Поиск нужного товара";
+            }
+        }
     }
 }
