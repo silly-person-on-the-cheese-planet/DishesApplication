@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DishesApplication"
         mc:Ignorable="d"
-            Title="LogIn" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
+        Title="LogIn" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="13*"/>
             <ColumnDefinition Width="27*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Авторизация" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,5"/>
-        
-        
+
         <Border Grid.ColumnSpan="2" BorderBrush="#FF4B8C4F" BorderThickness="2"></Border>
 
         <Grid Grid.Column="0" Background="#FF76E383" >
@@ -56,9 +55,8 @@
             </Grid>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Button x:Name="LogInButton" Width="150" Height="35" VerticalAlignment="Top" Margin="160 50 20 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF76E383" FontSize="18" Click="LogInButton_Click">Авторизация</Button>
+                <Button x:Name="LogInButton" Width="150" Height="35" VerticalAlignment="Top" Margin="160 50 20 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF76E383" FontSize="18" Content="Авторизация" Click="LogInButton_Click"/>
                 <Button x:Name="GuestButton" Width="180" Height="35" VerticalAlignment="Top" Margin="0 50 70 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF4B8C4F" FontSize="18" Content="Войти как Гость" Click="GuestButton_Click"/>
-
             </StackPanel>
         </Grid>
     </Grid>

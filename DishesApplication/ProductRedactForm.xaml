@@ -49,17 +49,17 @@
 
                     </StackPanel>
 
-                    
+
 
                     <StackPanel Orientation="Vertical" Margin="0,30,30,0">
-                        <TextBox x:Name="ProductArticleNumberTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Auto"/>
-                        <TextBox x:Name="ProductNameTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Auto"/>
-                        <TextBox x:Name="ProductCategoryTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Auto"/>
-                        <TextBox x:Name="ProductManufacturerTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Auto"/>
-                        <TextBox x:Name="ProductCostTextBox" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="350"/>
-                        <TextBox x:Name="ProductQuantityInStockTextBox" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="350"/>
+                        <TextBox x:Name="ProductArticleNumberTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Disabled"/>
+                        <TextBox x:Name="ProductNameTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Disabled"/>
+                        <TextBox x:Name="ProductCategoryTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Disabled"/>
+                        <TextBox x:Name="ProductManufacturerTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Disabled"/>
+                        <TextBox x:Name="ProductCostTextBox" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="350" HorizontalScrollBarVisibility="Disabled"/>
+                        <TextBox x:Name="ProductQuantityInStockTextBox" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="350" HorizontalScrollBarVisibility="Disabled"/>
 
-                        <TextBox x:Name="ProductDescriptionTextBox" VerticalAlignment="Top" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="14" BorderThickness="2" Width="350" Height="99" VerticalScrollBarVisibility="Auto" TextWrapping="WrapWithOverflow"/>
+                        <TextBox x:Name="ProductDescriptionTextBox" VerticalAlignment="Top" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="14" BorderThickness="2" Width="350" Height="99" VerticalScrollBarVisibility="Auto" TextWrapping="WrapWithOverflow" HorizontalScrollBarVisibility="Disabled"/>
 
                     </StackPanel>
                 </StackPanel>

@@ -14,10 +14,12 @@ namespace DishesApplication
     {
         private string connectionString = "Server=desktop-uijbk3u;Database=My;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;";
         private List<Product> products;
+        private List<BasketItem> basketItems = new List<BasketItem>();
 
-        public CatalogAuthorized()
+        public CatalogAuthorized(string userFullName)
         {
             InitializeComponent();
+            UserFullNameTextBLock.Text = userFullName;
             LoadProducts();
         }
 
@@ -73,7 +75,6 @@ namespace DishesApplication
 
             foreach (var product in products)
             {
-                // Создание элементов управления для отображения данных
                 Border productBorder = new Border
                 {
                     Height = 250,
@@ -94,7 +95,6 @@ namespace DishesApplication
                     BorderThickness = new Thickness(2)
                 };
 
-                // Установка изображения или картинки-заполнителя
                 Image productImage = new Image();
                 if (string.IsNullOrEmpty(product.ProductPhoto))
                 {
@@ -171,14 +171,14 @@ namespace DishesApplication
                 Grid.SetColumn(textStackPanel, 1);
                 productGrid.Children.Add(textStackPanel);
 
-                // Изменение надписи "Наличие на складе" в зависимости от значения колонки ProductStatus
                 TextBlock availabilityTextBlock = new TextBlock
                 {
                     Text = product.ProductStatus.ToLower() == "да" ? "Есть в наличии" : "Нет в наличии",
                     VerticalAlignment = VerticalAlignment.Center,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     FontSize = 14,
-                    TextWrapping = TextWrapping.WrapWithOverflow
+                    TextWrapping = TextWrapping.WrapWithOverflow,
+                    TextTrimming = TextTrimming.CharacterEllipsis
                 };
                 Grid.SetColumn(availabilityTextBlock, 2);
                 productGrid.Children.Add(availabilityTextBlock);
@@ -192,7 +192,7 @@ namespace DishesApplication
                 {
                     Source = new BitmapImage(new Uri("/icon-basket.png", UriKind.RelativeOrAbsolute))
                 };
-                basketImage.MouseDown += new MouseButtonEventHandler(basketImageButton_MouseDown);
+                basketImage.MouseDown += (sender, e) => AddToBasket(product);
                 basketBorder.Child = basketImage;
                 Grid.SetColumn(basketBorder, 2);
                 productGrid.Children.Add(basketBorder);
@@ -200,6 +200,19 @@ namespace DishesApplication
                 productBorder.Child = productGrid;
                 ProductStackPanel.Children.Add(productBorder);
             }
+        }
+
+        private void AddToBasket(Product product)
+        {
+            basketItems.Add(new BasketItem
+            {
+                ProductName = product.ProductName,
+                ProductDescription = product.ProductDescription,
+                ProductPhoto = product.ProductPhoto,
+                ProductManufacturer = product.ProductManufacturer,
+                ProductCost = product.ProductCost
+            });
+            MessageBox.Show("Товар добавлен в корзину", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void SearchProductsByDescription(string searchText)
@@ -210,8 +223,16 @@ namespace DishesApplication
 
         private void SearchProductsByCategory(string searchText)
         {
-            var filteredProducts = products.Where(p => p.ProductCategory.ToLower().Contains(searchText.ToLower())).ToList();
-            DisplayProducts(filteredProducts);
+            var categories = products.Select(p => p.ProductCategory).Distinct().ToList();
+            if (categories.Contains(searchText, StringComparer.OrdinalIgnoreCase))
+            {
+                var filteredProducts = products.Where(p => p.ProductCategory.ToLower().Contains(searchText.ToLower())).ToList();
+                DisplayProducts(filteredProducts);
+            }
+            else
+            {
+                MessageBox.Show("Неправильная категория. Возможные категории:\n" + string.Join("\n", categories), "Неправильная категория", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void SortProductsByPriceAscending()
@@ -254,23 +275,16 @@ namespace DishesApplication
 
         private void SortyrovkaUpButton_Click(object sender, RoutedEventArgs e)
         {
-            SortyrovkaUpBorder.Visibility = Visibility.Visible;
-            SortyrovkaDownBorder.Visibility = Visibility.Collapsed;
             SortProductsByPriceAscending();
-            
+            SortyrovkaDownBorder.Visibility = Visibility.Visible;
+            SortyrovkaUpBorder.Visibility = Visibility.Collapsed;
         }
 
         private void SortyrovkaDownButton_Click(object sender, RoutedEventArgs e)
         {
-            SortyrovkaUpBorder.Visibility = Visibility.Collapsed;
-            SortyrovkaDownBorder.Visibility = Visibility.Visible;
             SortProductsByPriceDescending();
-            
-        }
-
-        private void basketImageButton_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            // Логика добавления товара в корзину
+            SortyrovkaDownBorder.Visibility = Visibility.Collapsed;
+            SortyrovkaUpBorder.Visibility = Visibility.Visible;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -280,7 +294,7 @@ namespace DishesApplication
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            BasketForm basketForm = new(); basketForm.ShowDialog();
+            BasketForm basketForm = new BasketForm(basketItems); basketForm.ShowDialog();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -326,10 +340,16 @@ namespace DishesApplication
                 ProductFindTextBox.Text = "Поиск нужного товара";
             }
         }
+
+        private void basketImageButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 
     public class Product
     {
+        public string ProductArticleNumber { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public string ProductCategory { get; set; }
@@ -338,5 +358,14 @@ namespace DishesApplication
         public decimal ProductCost { get; set; }
         public int ProductQuantityInStock { get; set; }
         public string ProductStatus { get; set; }
+    }
+
+    public class BasketItem
+    {
+        public string ProductName { get; set; }
+        public string ProductDescription { get; set; }
+        public string ProductPhoto { get; set; }
+        public string ProductManufacturer { get; set; }
+        public decimal ProductCost { get; set; }
     }
 }

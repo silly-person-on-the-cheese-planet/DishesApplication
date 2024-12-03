@@ -5,16 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DishesApplication"
         mc:Ignorable="d"
-                Title="Basket" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
+        Title="Basket" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
     <Grid Background="#FF76E383">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="69*"/>
             <ColumnDefinition Width="31*"/>
-
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0" Margin="10" CornerRadius="20" Background="#FFFFFF" MinWidth="532" MinHeight="530">
-            <Border.Effect >
+            <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="LightGray"/>
             </Border.Effect>
 
@@ -27,19 +26,19 @@
                 </StackPanel>
                 <Border Height="475">
                     <ScrollViewer Grid.Row="2">
-                        <StackPanel VerticalAlignment="Top" Orientation="Vertical" Margin="10,10,5,0">
+                        <StackPanel x:Name="ProductStackPanel" VerticalAlignment="Top" Orientation="Vertical" Margin="10,10,5,0">
                             <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                                <Grid >
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="251*"/>
                                         <ColumnDefinition Width="444*"/>
                                         <ColumnDefinition Width="70*"/>
                                     </Grid.ColumnDefinitions>
                                     <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                        <Image x:Name="ProductImage"  Source="/picture.png"/>
+                                        <Image x:Name="ProductImage" Source="/picture.png"/>
                                     </Border>
 
-                                    <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1" >
+                                    <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1">
                                         <TextBlock x:Name="ProductNameTextBlock" FontSize="20" Margin="0,0,0,10">Наименование товара</TextBlock>
                                         <TextBlock x:Name="ProductDescriptionTextBlock" FontSize="16" Margin="0,0,0,15" Foreground="#FF4A4A4A">Описание товара</TextBlock>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
@@ -50,29 +49,23 @@
                                             <TextBlock FontSize="20" Margin="0 0 10 0">Цена:</TextBlock>
                                             <TextBlock x:Name="ProductCostTextBlock" FontSize="20" Text="0,00"></TextBlock>
                                         </StackPanel>
-
                                     </StackPanel>
 
                                     <Border Margin="5" Grid.Column="2" VerticalAlignment="Bottom">
-                                        <Image x:Name="CancelProductItemButton" Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" MouseDown="CancelProductItemButton_MouseDown" />
+                                        <Image x:Name="CancelProductItemButton" Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" MouseDown="CancelProductItemButton_MouseDown"/>
                                     </Border>
                                 </Grid>
                             </Border>
-
-
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
             </StackPanel>
         </Border>
 
-
-
         <Border Grid.Column="1" Margin="10" CornerRadius="20" Background="#FFFFFF" MinWidth="228" MinHeight="300" Height="300" VerticalAlignment="Top">
-            <Border.Effect >
+            <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="LightGray"/>
             </Border.Effect>
-
 
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Доставка в пункт выдачи" Margin="10" FontSize="14"/>
@@ -86,15 +79,15 @@
         </Border>
 
         <Border Grid.Column="1" Height="35" Margin="0,224,0,291" MaxHeight="35" CornerRadius="5" Background="#FF76E383" BorderBrush="#FF4B8C4F" BorderThickness="3" HorizontalAlignment="Center" MinWidth="200" MinHeight="35">
-            <Button x:Name="OrderButton" FontSize="16" Background="{x:Null}" BorderBrush="{x:Null}" Click="OrderButton_Click" >Заказать</Button>
+            <Button x:Name="OrderButton" FontSize="16" Background="{x:Null}" BorderBrush="{x:Null}" Click="OrderButton_Click">Заказать</Button>
         </Border>
 
         <Border Grid.Column="1" Height="35" CornerRadius="5" Background="#FF4B8C4F" BorderBrush="#FF4B8C4F" BorderThickness="3" HorizontalAlignment="Center" MinWidth="200" MinHeight="35" Margin="0,269,0,246">
-            <Button x:Name="CancelOrder" FontSize="16" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="CancelOrder_Click" >Отменить</Button>
+            <Button x:Name="CancelOrder" FontSize="16" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="CancelOrder_Click">Отменить</Button>
         </Border>
 
         <Border Grid.Column="1" Margin="0,22,30,0" Width="17" Height="17" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Image Source="/icon-pencil-tool.png" />
+            <Image Source="/icon-pencil-tool.png"/>
         </Border>
 
         <Border Grid.ColumnSpan="2" Background="#FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="180" Margin="0,0,0,0">

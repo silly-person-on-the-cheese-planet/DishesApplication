@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DishesApplication"
         mc:Ignorable="d"
-                Title="CatalogAuthorized" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
+        Title="CatalogAuthorized" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="61*"/>
@@ -27,7 +27,7 @@
                 </StackPanel>
             </Grid>
 
-            <TextBlock Grid.Column="1" Margin="20 5" Text="UserLoginExample" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
+            <TextBlock x:Name="UserFullNameTextBLock" Grid.Column="1" Margin="20 5" Text="UserLoginExample" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="10" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
 
             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1" Margin="40,0,40,0">
                 <Button Width="100" Height="30" FontSize="17" Foreground="#FFFFFF" Background="#FF76E383" BorderThickness="2.5" BorderBrush="#FF4B8C4F" Margin="0 0 20 0" Click="Button_Click_1">Корзина</Button>
@@ -55,21 +55,21 @@
             </Border>
         </Grid>
 
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="2">
             <ScrollViewer Grid.Row="2">
                 <StackPanel x:Name="ProductStackPanel" VerticalAlignment="Top" Orientation="Vertical" Margin="10,10,5,0">
                     <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50" Visibility="Collapsed">
-                        <Grid >
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="251*"/>
                                 <ColumnDefinition Width="444*"/>
                                 <ColumnDefinition Width="70*"/>
                             </Grid.ColumnDefinitions>
                             <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image x:Name="ProductImage"  Source="/picture.png"/>
+                                <Image x:Name="ProductImage" Source="/picture.png"/>
                             </Border>
 
-                            <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1" >
+                            <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1">
                                 <TextBlock x:Name="ProductNameTextBlock" FontSize="20" Margin="0,0,0,10">Наименование товара</TextBlock>
                                 <TextBlock x:Name="ProductDescriptionTextBlock" FontSize="16" Margin="0,0,0,15" Foreground="#FF4A4A4A" TextTrimming="CharacterEllipsis">Описание товара</TextBlock>
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
@@ -80,23 +80,20 @@
                                     <TextBlock FontSize="20" Margin="0 0 10 0">Цена:</TextBlock>
                                     <TextBlock x:Name="ProductCostTextBlock" FontSize="20" Text="0,00"></TextBlock>
                                 </StackPanel>
-
                             </StackPanel>
 
                             <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" TextWrapping="WrapWithOverflow">Наличие на складе</TextBlock>
 
                             <Border Margin="5" Grid.Column="2" VerticalAlignment="Bottom">
-                                <Image x:Name="basketImageButton" Source="/icon-basket.png" MouseDown="basketImageButton_MouseDown" />
+                                <Image x:Name="basketImageButton" Source="/icon-basket.png" MouseDown="basketImageButton_MouseDown"/>
                             </Border>
                         </Grid>
                     </Border>
-
                 </StackPanel>
             </ScrollViewer>
         </Grid>
         <Border Grid.Row="2" Background="#FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,17,0">
             <TextBlock Grid.Row="2" Height="16"> Каталог (Авторизованный пользователь)</TextBlock>
         </Border>
-
     </Grid>
 </Window>

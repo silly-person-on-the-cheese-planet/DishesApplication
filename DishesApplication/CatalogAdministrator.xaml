@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DishesApplication"
         mc:Ignorable="d"
-                    Title="CatalogAdministrator" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
-    <Grid >
+        Title="CatalogAdministrator" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="61*"/>
             <RowDefinition Height="61*"/>
@@ -23,12 +23,11 @@
             <Grid Grid.Column="0" Margin="2,2,2,2">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/logo.png"/>
-                    <TextBlock Text="Каталог" VerticalAlignment="Center" Padding="10,0,0,0" FontSize="22"/>
+                    <TextBlock Text="Каталог (Администратор)" VerticalAlignment="Center" Padding="10,0,0,0" FontSize="22"/>
                 </StackPanel>
             </Grid>
 
-
-            <TextBlock Grid.Column="1" Margin="20 5" Text="UserLoginExample" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
+            <TextBlock x:Name="UserFullNameTextBLock" Grid.Column="1" Margin="20 5" Text="AdminLoginExample" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="10" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
 
             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1" Margin="40,0,40,0">
                 <Button Width="100" Height="30" FontSize="17" Foreground="#FFFFFF" Background="#FF76E383" BorderThickness="2.5" BorderBrush="#FF4B8C4F" Click="Button_Click">Выход</Button>
@@ -39,41 +38,40 @@
             <Border BorderBrush="#FF4B8C4F" BorderThickness="2,0,2,2"/>
 
             <StackPanel Orientation="Horizontal" Margin="20,10,20,10">
-                <TextBox x:Name="ProductFindTextBox" Text="Поиск нужного товара" Foreground="Gray" Width="250" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" GotFocus="ProductFindTextBox_GotFocus" LostFocus="ProductFindTextBox_LostFocus" />
-                <Image Source="/icon-magnifier.png" Width="30" Height="30" />
+                <TextBox x:Name="ProductFindTextBox" Text="Поиск нужного товара" Foreground="Gray" Width="250" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" LostFocus="ProductFindTextBox_LostFocus" GotFocus="ProductFindTextBox_GotFocus" KeyDown="ProductFindTextBox_KeyDown"/>
+                <Image x:Name="ProductFindImageButton" Source="/icon-magnifier.png" Width="30" Height="30" MouseDown="ProductFindImageButton_MouseDown"/>
 
-                <TextBox x:Name="CategoryFindTextBox" Margin="10,0,0,0" Text="Категория" Foreground="Gray" Width="200" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" GotFocus="CategoryFindTextBox_GotFocus" LostFocus="CategoryFindTextBox_LostFocus"/>
-                <Image Source="/icon-magnifier.png" Width="30" Height="30"/>
-
-                <Image x:Name="AddProductImageButton" Source="/icon-plus.png" Margin="15,0,0,0" MouseDown="AddProductImageButton_MouseDown"/>
+                <TextBox x:Name="CategoryFindTextBox" Margin="3,0,0,0" Text="Категория" Foreground="Gray" Width="200" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" GotFocus="CategoryFindTextBox_GotFocus" LostFocus="CategoryFindTextBox_LostFocus" KeyDown="CategoryFindTextBox_KeyDown"/>
+                <Image x:Name="CategoryFindImageButton" Source="/icon-magnifier.png" Width="30" Height="30" MouseDown="CategoryFindImageButton_MouseDown"/>
+                <Image x:Name="AddProductImageButton" Margin="5,0,0,0" MouseDown="AddProductImageButton_MouseDown" Source="/icon-plus.png" />
             </StackPanel>
 
-            <Border x:Name="SortyrovkaUpBorder" HorizontalAlignment="Right" Margin="0,0,22,0" Width="160" MaxHeight="30" BorderBrush="#FF4B8C4F" Background="#FF76E383" BorderThickness="2.5" Visibility="Collapsed">
-                <Button x:Name="SortyrovkaUpButton" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="SortyrovkaUpButton_Click">Сортировка по цене ▴</Button>
+            <Border x:Name="SortyrovkaUpBorder" HorizontalAlignment="Right" Margin="0,0,22,0" Width="190" MaxHeight="30" BorderBrush="#FF4B8C4F" Background="#FF76E383" BorderThickness="2.5" Visibility="Collapsed">
+                <Button x:Name="SortyrovkaUpButton" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Click="SortyrovkaUpButton_Click">Сортировка по цене ▴</Button>
             </Border>
 
-            <Border x:Name="SortyrovkaDownBorder" HorizontalAlignment="Right" Margin="0,0,22,0" Width="160" MaxHeight="30" BorderBrush="#FF4B8C4F" Background="#FF76E383" BorderThickness="2.5" Visibility="Visible">
-                <Button x:Name="SortyrovkaDownButton" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="SortyrovkaDownButton_Click">Сортировка по цене ▾</Button>
+            <Border x:Name="SortyrovkaDownBorder" HorizontalAlignment="Right" Margin="0,0,22,0" Width="190" MaxHeight="30" BorderBrush="#FF4B8C4F" Background="#FF76E383" BorderThickness="2.5" Visibility="Visible">
+                <Button x:Name="SortyrovkaDownButton" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Click="SortyrovkaDownButton_Click">Сортировка по цене ▾</Button>
             </Border>
         </Grid>
 
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="2">
             <ScrollViewer Grid.Row="2">
-                <StackPanel VerticalAlignment="Top" Orientation="Vertical" Margin="10,10,5,0">
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
+                <StackPanel x:Name="ProductStackPanel" VerticalAlignment="Top" Orientation="Vertical" Margin="10,10,5,0">
+                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50" Visibility="Collapsed">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="251*"/>
                                 <ColumnDefinition Width="444*"/>
                                 <ColumnDefinition Width="70*"/>
                             </Grid.ColumnDefinitions>
                             <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image x:Name="ProductImage"  Source="/picture.png"/>
+                                <Image x:Name="ProductImage" Source="/picture.png"/>
                             </Border>
 
-                            <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1" >
-                                <TextBlock x:Name="ProductNameTextBlock" FontSize="20" Margin="0,0,0,10"><Run Text="Наименование товара"/></TextBlock>
-                                <TextBlock x:Name="ProductDescriptionTextBlock" FontSize="16" Margin="0,0,0,15" Foreground="#FF4A4A4A">Описание товара</TextBlock>
+                            <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1">
+                                <TextBlock x:Name="ProductNameTextBlock" FontSize="20" Margin="0,0,0,10">Наименование товара</TextBlock>
+                                <TextBlock x:Name="ProductDescriptionTextBlock" FontSize="16" Margin="0,0,0,15" Foreground="#FF4A4A4A" TextTrimming="CharacterEllipsis">Описание товара</TextBlock>
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                     <TextBlock FontSize="16" Margin="0,0,10,0">Производитель:</TextBlock>
                                     <TextBlock x:Name="ProductManufacturerTextBlock" FontSize="16"><Run Language="ru-ru" Text="Производитель"/></TextBlock>
@@ -82,30 +80,24 @@
                                     <TextBlock FontSize="20" Margin="0 0 10 0">Цена:</TextBlock>
                                     <TextBlock x:Name="ProductCostTextBlock" FontSize="20" Text="0,00"></TextBlock>
                                 </StackPanel>
-
                             </StackPanel>
 
+                            <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" TextWrapping="WrapWithOverflow">Наличие на складе</TextBlock>
 
-
-                            <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" TextWrapping="WrapWithOverflow" Margin="0,0,0,50">Наличие на складе</TextBlock>
-
-                            <Border Margin="10" Grid.Column="2" VerticalAlignment="Bottom">
-                                <Image x:Name="RedactIconImageButton" Source="/redact-icon.png" MouseDown="RedactIconImageButton_MouseDown" />
+                            <Border Margin="5" Grid.Column="2" VerticalAlignment="Bottom">
+                                <Image x:Name="RedactIconImageButton" Source="/icon-edit.png" MouseDown="RedactIconImageButton_MouseDown"/>
                             </Border>
 
-                            <Border Margin="10,131,10,0" Grid.Column="2" VerticalAlignment="Top">
-                                <Image x:Name="DeleteIconImageButton" Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" MouseDown="DeleteIconImageButton_MouseDown" />
+                            <Border Margin="5" Grid.Column="2" VerticalAlignment="Bottom">
+                                <Image x:Name="DeleteIconImageButton" Source="/icon-delete.png" MouseDown="DeleteIconImageButton_MouseDown"/>
                             </Border>
                         </Grid>
                     </Border>
-
-
                 </StackPanel>
             </ScrollViewer>
         </Grid>
         <Border Grid.Row="2" Background="#FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,17,0">
             <TextBlock Grid.Row="2" Height="16"> Каталог (Администратор)</TextBlock>
         </Border>
-
     </Grid>
 </Window>
