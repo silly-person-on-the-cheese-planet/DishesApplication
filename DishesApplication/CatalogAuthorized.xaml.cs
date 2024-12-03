@@ -24,27 +24,43 @@ namespace DishesApplication
             InitializeComponent();
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LogIn logIn = new(); logIn.Show(); Close();
+        }
+
+        
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            BasketForm basketForm = new(); basketForm.ShowDialog();
+        }
+
+        private void basketImageButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void SortyrovkaUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            SortyrovkaDownBorder.Visibility = Visibility.Visible;
+            SortyrovkaUpBorder.Visibility = Visibility.Collapsed;
+        }
+
+        private void SortyrovkaDownButton_Click(object sender, RoutedEventArgs e)
+        {
+            SortyrovkaUpBorder.Visibility = Visibility.Visible;
+            SortyrovkaDownBorder.Visibility = Visibility.Collapsed;
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            BasketForm basketForm = new(); basketForm.ShowDialog();
-        }
-
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            ProductCardForm productCardForm = new(); productCardForm.ShowDialog();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            LogIn logIn = new(); logIn.Show(); Close();
         }
     }
 }

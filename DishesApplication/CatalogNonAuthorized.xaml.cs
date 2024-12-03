@@ -37,9 +37,26 @@ namespace DishesApplication
             LogIn logIn = new(); logIn.Show(); Close();
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ProductCardForm productCardForm = new(); productCardForm.ShowDialog();
+            MessageBox.Show("Войдите в аккаунт!", "Режим гостя", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void basketImageButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Войдите в аккаунт!", "Режим гостя", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void SortyrovkaUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            SortyrovkaDownBorder.Visibility = Visibility.Visible;
+            SortyrovkaUpBorder.Visibility = Visibility.Collapsed;
+        }
+
+        private void SortyrovkaDownButton_Click(object sender, RoutedEventArgs e)
+        {
+            SortyrovkaUpBorder.Visibility = Visibility.Visible;
+            SortyrovkaDownBorder.Visibility = Visibility.Collapsed;
         }
     }
 }

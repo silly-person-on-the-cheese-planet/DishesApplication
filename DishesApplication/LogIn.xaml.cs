@@ -40,9 +40,9 @@ namespace DishesApplication
             
         }
 
-        private void RegButton_Click(object sender, RoutedEventArgs e)
+        private void GuestButton_Click(object sender, RoutedEventArgs e)
         {
-            Register register = new(); register.Show(); Close();
+            CatalogNonAuthorized catalogNonAuthorized = new(); catalogNonAuthorized.Show(); Close();
         }
     }
 }

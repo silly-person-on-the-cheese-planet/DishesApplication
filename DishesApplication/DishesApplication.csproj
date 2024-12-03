@@ -26,7 +26,12 @@
     <None Remove="N835D4.jpg" />
     <None Remove="N835F5.jpg" />
     <None Remove="picture.png" />
+    <None Remove="redact-icon.png" />
     <None Remove="А112Т4.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +52,7 @@
     <Resource Include="N835D4.jpg" />
     <Resource Include="N835F5.jpg" />
     <Resource Include="picture.png" />
+    <Resource Include="redact-icon.png" />
     <Resource Include="А112Т4.jpg" />
   </ItemGroup>
 

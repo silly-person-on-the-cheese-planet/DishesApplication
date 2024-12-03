@@ -24,7 +24,12 @@ namespace DishesApplication
             InitializeComponent();
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LogIn logIn = new(); logIn.Show(); Close();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -32,19 +37,31 @@ namespace DishesApplication
             }
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        private void DeleteIconImageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ProductAddForm productAddForm = new(); productAddForm.ShowDialog();
+
         }
 
-        private void Image_MouseDown_1(object sender, MouseButtonEventArgs e)
+        private void RedactIconImageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ProductRedactForm productRedactForm = new(); productRedactForm.ShowDialog();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddProductImageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            LogIn logIn = new(); logIn.Show(); Close();
+            ProductAddForm productAddForm = new(); productAddForm.ShowDialog();
+        }
+
+        private void SortyrovkaUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            SortyrovkaDownBorder.Visibility = Visibility.Visible;
+            SortyrovkaUpBorder.Visibility = Visibility.Collapsed;
+        }
+
+        private void SortyrovkaDownButton_Click(object sender, RoutedEventArgs e)
+        {
+            SortyrovkaUpBorder.Visibility = Visibility.Visible;
+            SortyrovkaDownBorder.Visibility = Visibility.Collapsed;
         }
     }
 }
