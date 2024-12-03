@@ -39,6 +39,7 @@ namespace DishesApplication
 
         private void OrderButton_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Успешно!", "Заказ оформлен", MessageBoxButton.OK, MessageBoxImage.Information);
             DialogResult= true;
         }
     }

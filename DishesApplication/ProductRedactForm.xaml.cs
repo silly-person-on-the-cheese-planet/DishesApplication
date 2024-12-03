@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace DishesApplication
 {
@@ -40,6 +41,21 @@ namespace DishesApplication
         private void RegButton_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+        }
+
+        private void AddPhotoToProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new()
+            {
+                Filter = "Image Files (*.png;*.jpg)| *.png;*.jpg",
+                Title = "Выберите изображение профиля"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var bitmap = new BitmapImage(new Uri(openFileDialog.FileName));
+                ImageProduct.Source = bitmap;
+            }
         }
     }
 }
