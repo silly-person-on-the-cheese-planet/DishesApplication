@@ -27,7 +27,6 @@
                 </StackPanel>
             </Grid>
 
-
             <TextBlock Grid.Column="1" Margin="20 5" Text="UserLoginExample" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
 
             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1" Margin="40,0,40,0">
@@ -40,11 +39,11 @@
             <Border BorderBrush="#FF4B8C4F" BorderThickness="2,0,2,2"/>
 
             <StackPanel Orientation="Horizontal" Margin="20,10,20,10">
-                <TextBox x:Name="ProductFindTextBox" Text="Поиск нужного товара" Foreground="Gray" Width="250" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" LostFocus="ProductFindTextBox_LostFocus" GotFocus="ProductFindTextBox_GotFocus" />
-                <Image Source="/icon-magnifier.png" Width="30" Height="30" />
+                <TextBox x:Name="ProductFindTextBox" Text="Поиск нужного товара" Foreground="Gray" Width="250" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" LostFocus="ProductFindTextBox_LostFocus" GotFocus="ProductFindTextBox_GotFocus" KeyDown="ProductFindTextBox_KeyDown"/>
+                <Image x:Name="ProductFindImageButton" Source="/icon-magnifier.png" Width="30" Height="30" MouseDown="ProductFindImageButton_MouseDown"/>
 
-                <TextBox x:Name="CategoryFindTextBox" Margin="10,0,0,0" Text="Категория" Foreground="Gray" Width="200" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" GotFocus="CategoryFindTextBox_GotFocus" LostFocus="CategoryFindTextBox_LostFocus"/>
-                <Image Source="/icon-magnifier.png" Width="30" Height="30"/>
+                <TextBox x:Name="CategoryFindTextBox" Margin="10,0,0,0" Text="Категория" Foreground="Gray" Width="200" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" GotFocus="CategoryFindTextBox_GotFocus" LostFocus="CategoryFindTextBox_LostFocus" KeyDown="CategoryFindTextBox_KeyDown"/>
+                <Image x:Name="CategoryFindImageButton" Source="/icon-magnifier.png" Width="30" Height="30" MouseDown="CategoryFindImageButton_MouseDown"/>
             </StackPanel>
 
             <Border x:Name="SortyrovkaUpBorder" HorizontalAlignment="Right" Margin="0,0,22,0" Width="190" MaxHeight="30" BorderBrush="#FF4B8C4F" Background="#FF76E383" BorderThickness="2.5" Visibility="Collapsed">
@@ -58,8 +57,8 @@
 
         <Grid Grid.Row="2" >
             <ScrollViewer Grid.Row="2">
-                <StackPanel VerticalAlignment="Top" Orientation="Vertical" Margin="10,10,5,0">
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
+                <StackPanel x:Name="ProductStackPanel" VerticalAlignment="Top" Orientation="Vertical" Margin="10,10,5,0">
+                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50" Visibility="Collapsed">
                         <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="251*"/>
@@ -72,7 +71,7 @@
 
                             <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1" >
                                 <TextBlock x:Name="ProductNameTextBlock" FontSize="20" Margin="0,0,0,10">Наименование товара</TextBlock>
-                                <TextBlock x:Name="ProductDescriptionTextBlock" FontSize="16" Margin="0,0,0,15" Foreground="#FF4A4A4A">Описание товара</TextBlock>
+                                <TextBlock x:Name="ProductDescriptionTextBlock" FontSize="16" Margin="0,0,0,15" Foreground="#FF4A4A4A" TextTrimming="CharacterEllipsis">Описание товара</TextBlock>
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                     <TextBlock FontSize="16" Margin="0,0,10,0">Производитель:</TextBlock>
                                     <TextBlock x:Name="ProductManufacturerTextBlock" FontSize="16"><Run Language="ru-ru" Text="Производитель"/></TextBlock>
@@ -84,8 +83,6 @@
 
                             </StackPanel>
 
-
-
                             <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" TextWrapping="WrapWithOverflow">Наличие на складе</TextBlock>
 
                             <Border Margin="5" Grid.Column="2" VerticalAlignment="Bottom">
@@ -93,7 +90,6 @@
                             </Border>
                         </Grid>
                     </Border>
-
 
                 </StackPanel>
             </ScrollViewer>
