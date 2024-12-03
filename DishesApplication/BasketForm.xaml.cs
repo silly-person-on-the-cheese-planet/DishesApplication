@@ -42,5 +42,10 @@ namespace DishesApplication
             MessageBox.Show("Успешно!", "Заказ оформлен", MessageBoxButton.OK, MessageBoxImage.Information);
             DialogResult= true;
         }
+
+        private void CancelProductItemButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

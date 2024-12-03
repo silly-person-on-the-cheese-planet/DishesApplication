@@ -75,11 +75,11 @@
                                 <TextBlock x:Name="ProductDescriptionTextBlock" FontSize="16" Margin="0,0,0,15" Foreground="#FF4A4A4A">Описание товара</TextBlock>
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                     <TextBlock FontSize="16" Margin="0,0,10,0">Производитель:</TextBlock>
-                                    <TextBlock x:Name="ProductManufacturerTextBlock" Text="Нева" FontSize="16"></TextBlock>
+                                    <TextBlock x:Name="ProductManufacturerTextBlock" FontSize="16"><Run Language="ru-ru" Text="Производитель"/></TextBlock>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock FontSize="20" Margin="0 0 10 0">Цена:</TextBlock>
-                                    <TextBlock x:Name="ProductCostTextBlock" FontSize="20" Text="1960,00"></TextBlock>
+                                    <TextBlock x:Name="ProductCostTextBlock" FontSize="20" Text="0,00"></TextBlock>
                                 </StackPanel>
 
                             </StackPanel>

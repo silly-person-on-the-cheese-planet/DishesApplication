@@ -56,4 +56,8 @@
     <Resource Include="А112Т4.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ModelsFolder\" />
+  </ItemGroup>
+
 </Project>
