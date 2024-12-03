@@ -31,8 +31,10 @@ namespace DishesApplication
             {
                 int roleId = GetUserRoleId(login);
                 string role = GetRoleName(roleId);
-                string userFullName = GetUserFullName(login);
-                OpenCatalogWindow(role, userFullName);
+                string userSurname = GetUserSurname(login);
+                string userName = GetUserName(login);
+                string userPatronymic = GetUserPatronymic(login);
+                OpenCatalogWindow(role, userSurname, userName, userPatronymic);
             }
             else
             {
@@ -102,14 +104,14 @@ namespace DishesApplication
             }
         }
 
-        private string GetUserFullName(string login)
+        private string GetUserSurname(string login)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT [UserSurname] + ' ' + [UserName] + ' ' + [UserPatronymic] FROM [dbo].[User] WHERE CAST([UserLogin] AS NVARCHAR(MAX)) = @UserLogin";
+                    string query = "SELECT [UserSurname] FROM [dbo].[User] WHERE CAST([UserLogin] AS NVARCHAR(MAX)) = @UserLogin";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@UserLogin", login);
@@ -120,23 +122,69 @@ namespace DishesApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при получении полного имени пользователя: " + ex.Message);
+                MessageBox.Show("Ошибка при получении фамилии пользователя: " + ex.Message);
                 return string.Empty;
             }
         }
 
-        private void OpenCatalogWindow(string role, string userFullName)
+        private string GetUserName(string login)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT [UserName] FROM [dbo].[User] WHERE CAST([UserLogin] AS NVARCHAR(MAX)) = @UserLogin";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@UserLogin", login);
+                        var result = command.ExecuteScalar();
+                        return result?.ToString() ?? string.Empty;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при получении имени пользователя: " + ex.Message);
+                return string.Empty;
+            }
+        }
+
+        private string GetUserPatronymic(string login)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT [UserPatronymic] FROM [dbo].[User] WHERE CAST([UserLogin] AS NVARCHAR(MAX)) = @UserLogin";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@UserLogin", login);
+                        var result = command.ExecuteScalar();
+                        return result?.ToString() ?? string.Empty;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при получении отчества пользователя: " + ex.Message);
+                return string.Empty;
+            }
+        }
+
+        private void OpenCatalogWindow(string role, string userSurname, string userName, string userPatronymic)
         {
             switch (role)
             {
                 case "Менеджер":
                 case "Клиент":
-                    CatalogAuthorized catalogAuthorized = new CatalogAuthorized(userFullName);
+                    CatalogAuthorized catalogAuthorized = new CatalogAuthorized(userSurname, userName, userPatronymic);
                     catalogAuthorized.Show();
                     Close();
                     break;
                 case "Администратор":
-                    CatalogAdministrator catalogAdministrator = new CatalogAdministrator(userFullName);
+                    CatalogAdministrator catalogAdministrator = new CatalogAdministrator(userSurname, userName, userPatronymic);
                     catalogAdministrator.Show();
                     Close();
                     break;

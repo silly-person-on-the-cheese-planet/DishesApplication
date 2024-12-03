@@ -27,10 +27,14 @@
                 </StackPanel>
             </Grid>
 
-            <TextBlock x:Name="UserFullNameTextBLock" Grid.Column="1" Margin="20 5" Text="AdminLoginExample" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="10" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
-
             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1" Margin="40,0,40,0">
                 <Button Width="100" Height="30" FontSize="17" Foreground="#FFFFFF" Background="#FF76E383" BorderThickness="2.5" BorderBrush="#FF4B8C4F" Click="Button_Click">Выход</Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="20,5" VerticalAlignment="Center" HorizontalAlignment="Right" >
+                <TextBlock x:Name="UserSurnameTextBlock" FontSize="16" Margin="0,0,5,0"/>
+                <TextBlock x:Name="UserNameTextBlock" FontSize="16" Margin="0,0,5,0"/>
+                <TextBlock x:Name="UserPatronymicTextBlock" FontSize="16"/>
             </StackPanel>
         </Grid>
 

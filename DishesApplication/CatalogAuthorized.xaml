@@ -27,11 +27,15 @@
                 </StackPanel>
             </Grid>
 
-            <TextBlock x:Name="UserFullNameTextBLock" Grid.Column="1" Margin="20 5" Text="UserLoginExample" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="10" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
-
-            <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1" Margin="40,0,40,0">
+            <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1" Margin="40,0,40,0" VerticalAlignment="Center">
                 <Button Width="100" Height="30" FontSize="17" Foreground="#FFFFFF" Background="#FF76E383" BorderThickness="2.5" BorderBrush="#FF4B8C4F" Margin="0 0 20 0" Click="Button_Click_1">Корзина</Button>
                 <Button Width="100" Height="30" FontSize="17" Foreground="#FFFFFF" Background="#FF76E383" BorderThickness="2.5" BorderBrush="#FF4B8C4F" Click="Button_Click">Выход</Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="20,5" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock x:Name="UserSurnameTextBlock" FontSize="16" Margin="0,0,5,0"/>
+                <TextBlock x:Name="UserNameTextBlock" FontSize="16" Margin="0,0,5,0"/>
+                <TextBlock x:Name="UserPatronymicTextBlock" FontSize="16"/>
             </StackPanel>
         </Grid>
 
@@ -42,7 +46,7 @@
                 <TextBox x:Name="ProductFindTextBox" Text="Поиск нужного товара" Foreground="Gray" Width="250" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" LostFocus="ProductFindTextBox_LostFocus" GotFocus="ProductFindTextBox_GotFocus" KeyDown="ProductFindTextBox_KeyDown"/>
                 <Image x:Name="ProductFindImageButton" Source="/icon-magnifier.png" Width="30" Height="30" MouseDown="ProductFindImageButton_MouseDown"/>
 
-                <TextBox x:Name="CategoryFindTextBox" Margin="10,0,0,0" Text="Категория" Foreground="Gray" Width="200" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" GotFocus="CategoryFindTextBox_GotFocus" LostFocus="CategoryFindTextBox_LostFocus" KeyDown="CategoryFindTextBox_KeyDown"/>
+                <TextBox x:Name="CategoryFindTextBox" Margin="3,0,0,0" Text="Категория" Foreground="Gray" Width="200" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" GotFocus="CategoryFindTextBox_GotFocus" LostFocus="CategoryFindTextBox_LostFocus" KeyDown="CategoryFindTextBox_KeyDown"/>
                 <Image x:Name="CategoryFindImageButton" Source="/icon-magnifier.png" Width="30" Height="30" MouseDown="CategoryFindImageButton_MouseDown"/>
             </StackPanel>
 

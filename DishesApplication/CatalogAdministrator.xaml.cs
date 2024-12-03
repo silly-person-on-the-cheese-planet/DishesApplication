@@ -15,10 +15,12 @@ namespace DishesApplication
         private string connectionString = "Server=desktop-uijbk3u;Database=My;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;";
         private List<Product> products;
 
-        public CatalogAdministrator(string userFullName)
+        public CatalogAdministrator(string userSurname, string userName, string userPatronymic)
         {
             InitializeComponent();
-            UserFullNameTextBLock.Text = userFullName;
+            UserSurnameTextBlock.Text = userSurname;
+            UserNameTextBlock.Text = userName;
+            UserPatronymicTextBlock.Text = userPatronymic;
             LoadProducts();
         }
 
@@ -179,7 +181,8 @@ namespace DishesApplication
                     HorizontalAlignment = HorizontalAlignment.Center,
                     FontSize = 14,
                     TextWrapping = TextWrapping.WrapWithOverflow,
-                    TextTrimming = TextTrimming.CharacterEllipsis
+                    TextTrimming = TextTrimming.CharacterEllipsis,
+                    Margin = new Thickness(0,0,0,70)
                 };
                 Grid.SetColumn(availabilityTextBlock, 2);
                 productGrid.Children.Add(availabilityTextBlock);

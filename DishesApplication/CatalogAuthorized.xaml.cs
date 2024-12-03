@@ -16,10 +16,12 @@ namespace DishesApplication
         private List<Product> products;
         private List<BasketItem> basketItems = new List<BasketItem>();
 
-        public CatalogAuthorized(string userFullName)
+        public CatalogAuthorized(string userSurname, string userName, string userPatronymic)
         {
             InitializeComponent();
-            UserFullNameTextBLock.Text = userFullName;
+            UserSurnameTextBlock.Text = userSurname;
+            UserNameTextBlock.Text = userName;
+            UserPatronymicTextBlock.Text = userPatronymic;
             LoadProducts();
         }
 
@@ -178,7 +180,8 @@ namespace DishesApplication
                     HorizontalAlignment = HorizontalAlignment.Center,
                     FontSize = 14,
                     TextWrapping = TextWrapping.WrapWithOverflow,
-                    TextTrimming = TextTrimming.CharacterEllipsis
+                    TextTrimming = TextTrimming.CharacterEllipsis,
+                    Margin = new Thickness(0, 0, 0, 70)
                 };
                 Grid.SetColumn(availabilityTextBlock, 2);
                 productGrid.Children.Add(availabilityTextBlock);
