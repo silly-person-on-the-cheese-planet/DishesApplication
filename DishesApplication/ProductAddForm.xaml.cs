@@ -12,13 +12,14 @@ namespace DishesApplication
     public partial class ProductAddForm : Window
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
-        private string productPhotoPath;
+        public string productPhotoPath;
 
         public ProductAddForm()
         {
             InitializeComponent();
             productPhotoPath = "/picture.png";
         }
+
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -62,7 +63,7 @@ namespace DishesApplication
             }
         }
 
-        private async Task<bool> AddProductToDatabaseAsync()
+        public async Task<bool> AddProductToDatabaseAsync()
         {
             try
             {

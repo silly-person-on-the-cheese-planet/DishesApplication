@@ -11,13 +11,26 @@ namespace DishesApplication
 {
     public partial class BasketForm : Window
     {
-        private List<BasketItem> basketItems;
+        public List<BasketItem> basketItems;
 
         public BasketForm(List<BasketItem> basketItems)
         {
             InitializeComponent();
             this.basketItems = basketItems;
             DisplayBasketItems();
+        }
+
+        public void AddToBasket(Product product)
+        {
+            basketItems.Add(new BasketItem
+            {
+                ProductName = product.ProductName,
+                ProductDescription = product.ProductDescription,
+                ProductPhoto = product.ProductPhoto,
+                ProductManufacturer = product.ProductManufacturer,
+                ProductCost = product.ProductCost
+            });
+            MessageBox.Show("Товар добавлен в корзину", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void DisplayBasketItems()
@@ -144,13 +157,13 @@ namespace DishesApplication
             UpdateTotalCost();
         }
 
-        private void RemoveFromBasket(BasketItem item)
+        public void RemoveFromBasket(BasketItem item)
         {
             basketItems.Remove(item);
             DisplayBasketItems();
         }
 
-        private void UpdateTotalCost()
+        public void UpdateTotalCost()
         {
             decimal totalCost = basketItems.Sum(item => item.ProductCost);
             EndCostOrderTextBlock.Text = totalCost.ToString("C");

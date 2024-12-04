@@ -95,7 +95,7 @@ namespace DishesApplication
             CaptchaTextBox.IsReadOnly = false;
         }
 
-        private bool AuthenticateUser(string login, string password)
+        public bool AuthenticateUser(string login, string password)
         {
             try
             {
@@ -118,6 +118,7 @@ namespace DishesApplication
                 return false;
             }
         }
+
 
         private int GetUserRoleId(string login)
         {
