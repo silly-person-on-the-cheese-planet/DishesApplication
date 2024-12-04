@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DishesApplication"
         mc:Ignorable="d"
-            Title="LogIn" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
+        Title="LogIn" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="13*"/>
             <ColumnDefinition Width="27*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Авторизация" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,5"/>
-        
-        
+
         <Border Grid.ColumnSpan="2" BorderBrush="#FF4B8C4F" BorderThickness="2"></Border>
 
         <Grid Grid.Column="0" Background="#FF76E383" >
@@ -27,11 +26,11 @@
             <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Text="ООО «Посуда»" FontSize="22"/>
         </Grid>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Margin="0, -50, 0, 0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="180*"/>
-                <RowDefinition Height="93*"/>
-                <RowDefinition Height="277*"/>
+                <RowDefinition Height="146*"/>
+                <RowDefinition Height="201*"/>
+                <RowDefinition Height="253*"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
@@ -43,22 +42,29 @@
                 <Grid Grid.Column="0">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right">
                         <TextBlock Text="Логин" FontSize="20" Margin="0 0 0 30"/>
-                        <TextBlock Text="Пароль" FontSize="20"/>
+                        <TextBlock Text="Пароль" FontSize="20" Margin="0 0 0 30"/>
+                        <TextBlock x:Name="CaptchaLabel" Text="CAPTCHA" FontSize="20" Visibility="Collapsed"/>
                     </StackPanel>
                 </Grid>
 
                 <Grid Grid.Column="1">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50 0 0 0" Width="350">
                         <TextBox x:Name="UserLoginTextBox" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="20" BorderThickness="2"/>
-                        <PasswordBox x:Name="UserPasswordBox" MinWidth="350" BorderBrush="#FF4B8C4F" FontSize="20" BorderThickness="2" Width="350"/>
+                        <PasswordBox x:Name="UserPasswordBox" MinWidth="350" BorderBrush="#FF4B8C4F" FontSize="20" BorderThickness="2" Width="350" Margin="0 0 0 30"/>
+                        <TextBox x:Name="UserPasswordTextBoxReadOnly" MinWidth="350" BorderBrush="#FF4B8C4F" FontSize="20" BorderThickness="2" Width="350" Margin="0 0 0 30" Visibility="Collapsed" IsReadOnly="True"/>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBox x:Name="CaptchaTextBox" VerticalContentAlignment="Center" MinWidth="150" BorderBrush="#FF4B8C4F" FontSize="20" BorderThickness="2" Visibility="Collapsed" Margin="0 0 10 0"/>
+                            <Border x:Name="CaptchaBorder" Grid.Row="2" BorderBrush="#FF4B8C4F" BorderThickness="2" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Canvas x:Name="CaptchaCanvas" Width="100" Height="31.87"/>
+                            </Border>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </Grid>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Button x:Name="LogInButton" Width="150" Height="35" VerticalAlignment="Top" Margin="160 50 20 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF76E383" FontSize="18" Click="LogInButton_Click">Авторизация</Button>
-                <Button x:Name="RegButton" Width="180" Height="35" VerticalAlignment="Top" Margin="0 50 70 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF4B8C4F" FontSize="18" Click="RegButton_Click">Регистрация</Button>
-
+                <Button x:Name="LogInButton" Width="150" Height="35" VerticalAlignment="Top" Margin="160 50 20 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF76E383" FontSize="18" Content="Авторизация" Click="LogInButton_Click"/>
+                <Button x:Name="GuestButton" Width="180" Height="35" VerticalAlignment="Top" Margin="0 50 70 0" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF4B8C4F" FontSize="18" Content="Войти как Гость" Click="GuestButton_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -33,9 +33,9 @@
 
             <Grid>
                 <Border Width="150" Height="150" Margin="393,30,40,313" BorderThickness="2" BorderBrush="#FF4B8C4F">
-                    <Image Source="/picture.png" />
+                    <Image x:Name="ImageProduct" Source="/picture.png" />
                 </Border>
-                <Button Width="140" Height="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF76E383" Margin="398,207,45,256">Выбрать фото</Button>
+                <Button x:Name="AddPhotoToProductButton" Width="140" Height="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2" Background="#FF76E383" Margin="398,207,45,256" Click="AddPhotoToProductButton_Click">Выбрать фото</Button>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="35,30,30,0">
@@ -49,17 +49,17 @@
 
                     </StackPanel>
 
-                    
+
 
                     <StackPanel Orientation="Vertical" Margin="0,30,30,0">
-                        <TextBox x:Name="ProductArticleNumberTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Auto"/>
-                        <TextBox x:Name="ProductNameTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Auto"/>
-                        <TextBox x:Name="ProductCategoryTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Auto"/>
-                        <TextBox x:Name="ProductManufacturerTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Auto"/>
-                        <TextBox x:Name="ProductCostTextBox" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="350"/>
-                        <TextBox x:Name="ProductQuantityInStockTextBox" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="350"/>
+                        <TextBox x:Name="ProductArticleNumberTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Disabled"/>
+                        <TextBox x:Name="ProductNameTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Disabled"/>
+                        <TextBox x:Name="ProductCategoryTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Disabled"/>
+                        <TextBox x:Name="ProductManufacturerTextBox" HorizontalAlignment="Left" MaxWidth="150" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="150" HorizontalScrollBarVisibility="Disabled"/>
+                        <TextBox x:Name="ProductCostTextBox" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="350" HorizontalScrollBarVisibility="Disabled"/>
+                        <TextBox x:Name="ProductQuantityInStockTextBox" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="18" BorderThickness="2" Width="350" HorizontalScrollBarVisibility="Disabled"/>
 
-                        <TextBox x:Name="ProductDescriptionTextBox" VerticalAlignment="Top" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="14" BorderThickness="2" Width="350" Height="99" VerticalScrollBarVisibility="Auto" TextWrapping="WrapWithOverflow"/>
+                        <TextBox x:Name="ProductDescriptionTextBox" VerticalAlignment="Top" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="14" BorderThickness="2" Width="350" Height="99" VerticalScrollBarVisibility="Auto" TextWrapping="WrapWithOverflow" HorizontalScrollBarVisibility="Disabled"/>
 
                     </StackPanel>
                 </StackPanel>
@@ -80,3 +80,4 @@
         <TextBlock Text="Редактирование карточки товара" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,5" Height="17"/>
     </Grid>
 </Window>
+

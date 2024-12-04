@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DishesApplication"
         mc:Ignorable="d"
-                    Title="CatalogAdministrator" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550">
-    <Grid MouseDown="Grid_MouseDown">
+        Title="CatalogAdministrator" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="61*"/>
-            <RowDefinition Height="61*"/>
-            <RowDefinition Height="428*"/>
+            <RowDefinition Height="96*"/>
+            <RowDefinition Height="393*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="#FF76E383">
@@ -23,446 +23,88 @@
             <Grid Grid.Column="0" Margin="2,2,2,2">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/logo.png"/>
-                    <TextBlock Text="Каталог" VerticalAlignment="Center" Padding="10,0,0,0" FontSize="22"/>
+                    <TextBlock Text="Каталог (Администратор)" VerticalAlignment="Center" Padding="10,0,0,0" FontSize="22"/>
                 </StackPanel>
             </Grid>
-
-            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Column="1" Margin="20 5 20 5">
-                <Border Background="Red" CornerRadius="50" Margin="0,0,5,0">
-                    <Image Source="/icon-user-profile.png"/>
-                </Border>
-                <TextBlock Text="AdminLoginExample" VerticalAlignment="Center" FontSize="20"/>
-            </StackPanel>
 
             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Column="1" Margin="40,0,40,0">
                 <Button Width="100" Height="30" FontSize="17" Foreground="#FFFFFF" Background="#FF76E383" BorderThickness="2.5" BorderBrush="#FF4B8C4F" Click="Button_Click">Выход</Button>
             </StackPanel>
-        </Grid>
 
-        <Grid Grid.Row="1" Background="#FFFFFF">
-            <Border BorderBrush="#FF4B8C4F" BorderThickness="2,0,2,2"/>
-
-            <Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Margin="2">
-                <Image Source="/icon-plus.png" MouseDown="Image_MouseDown" />
-            </Border>
-
-            <StackPanel Orientation="Horizontal" Margin="20,10,20,10">
-                <TextBox Text="Поиск нужного товара" Foreground="Gray" Width="250" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" />
-                <Image Source="/icon-magnifier.png" />
-
-                <TextBox Margin="178,0,0,0" Text="Категория" Foreground="Gray" Width="250" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5"/>
-                <Image Source="/icon-magnifier.png"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="20,5" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock x:Name="UserSurnameTextBlock" FontSize="16" Margin="0,0,5,0"/>
+                <TextBlock x:Name="UserNameTextBlock" FontSize="16" Margin="0,0,5,0"/>
+                <TextBlock x:Name="UserPatronymicTextBlock" FontSize="16"/>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="1" Background="#FFFFFF" Height="96">
+            <Border BorderBrush="#FF4B8C4F" BorderThickness="2,0,2,2"/>
+
+            <StackPanel Orientation="Horizontal" Margin="20,10,20,10" VerticalAlignment="Top" MaxHeight="45">
+                <TextBox x:Name="ProductFindTextBox" Text="Поиск нужного товара" Foreground="Gray" Width="250" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" LostFocus="ProductFindTextBox_LostFocus" GotFocus="ProductFindTextBox_GotFocus" KeyDown="ProductFindTextBox_KeyDown"/>
+                <Image x:Name="ProductFindImageButton" Source="/icon-magnifier.png" Width="30" Height="30" MouseDown="ProductFindImageButton_MouseDown"/>
+
+                <ComboBox x:Name="CategoryFindComboBox" Margin="10,0,10,0" Text="Категория" Foreground="Gray" Width="200" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" SelectionChanged="CategoryFindComboBox_SelectionChanged"/>
+
+                <ComboBox x:Name="ManufacturerFilterComboBox" Margin="3,0,0,0" Foreground="Gray" Width="200" MaxHeight="30" FontSize="16" BorderBrush="#FF4B8C4F" BorderThickness="2.5" SelectionChanged="ManufacturerFilterComboBox_SelectionChanged"/>
+
+                <Image x:Name="AddProductImageButton" Margin="12,0,0,0" MouseDown="AddProductImageButton_MouseDown" Source="/icon-plus.png"/>
+            </StackPanel>
+
+            <Border x:Name="SortyrovkaUpBorder" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,7" Width="190" MaxHeight="30" BorderBrush="#FF4B8C4F" Background="#FF76E383" BorderThickness="2.5" Visibility="Collapsed">
+                <Button x:Name="SortyrovkaUpButton" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Click="SortyrovkaUpButton_Click">Сортировка по цене ▴</Button>
+            </Border>
+
+            <Border x:Name="SortyrovkaDownBorder" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,7" Width="190" MaxHeight="30" BorderBrush="#FF4B8C4F" Background="#FF76E383" BorderThickness="2.5" Visibility="Visible">
+                <Button x:Name="SortyrovkaDownButton" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Click="SortyrovkaDownButton_Click">Сортировка по цене ▾</Button>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="2">
             <ScrollViewer Grid.Row="2">
-                <StackPanel VerticalAlignment="Top" Orientation="Vertical" Margin="10,10,5,0">
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
+                <StackPanel x:Name="ProductStackPanel" VerticalAlignment="Top" Orientation="Vertical" Margin="10,10,5,0">
+                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50" Visibility="Collapsed">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="251*"/>
-                                <ColumnDefinition Width="136*"/>
-                                <ColumnDefinition Width="308*"/>
+                                <ColumnDefinition Width="444*"/>
                                 <ColumnDefinition Width="70*"/>
                             </Grid.ColumnDefinitions>
                             <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image  Source="/D036H2.jpg"/>
+                                <Image x:Name="ProductImage" Source="/picture.png"/>
                             </Border>
 
-                            <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="1">
-                                <TextBlock Text="Артикул:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Название:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Производитель:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Цена:" FontSize="16" Margin="0 50 0 20" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Осталось:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
+                            <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1">
+                                <TextBlock x:Name="ProductNameTextBlock" FontSize="20" Margin="0,0,0,10">Наименование товара</TextBlock>
+                                <TextBlock x:Name="ProductDescriptionTextBlock" FontSize="16" Margin="0,0,0,15" Foreground="#FF4A4A4A" TextTrimming="CharacterEllipsis">Описание товара</TextBlock>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock FontSize="16" Margin="0,0,10,0">Производитель:</TextBlock>
+                                    <TextBlock x:Name="ProductManufacturerTextBlock" FontSize="16"><Run Language="ru-ru" Text="Производитель"/></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="20" Margin="0,0,10,0">Цена:</TextBlock>
+                                    <TextBlock x:Name="ProductCostTextBlock" FontSize="20" Text="0,00"></TextBlock>
+                                </StackPanel>
                             </StackPanel>
 
-                            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Text="D036H2" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Сковорода" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Нева" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="1960,00 руб." FontSize="16" Margin="10 50 0 20" HorizontalAlignment="Left"/>
-                                <TextBlock Text="12 штук" FontSize="16" Margin="10 0 0 10" HorizontalAlignment="Left"/>
-                            </StackPanel>
+                            <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" TextWrapping="WrapWithOverflow">Наличие на складе</TextBlock>
 
-                            <StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Border Margin="5">
-                                    <Image Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" Margin="0,0,0,20"/>
-                                </Border>
-
-                                <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" MouseDown="Image_MouseDown_1" />
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="251*"/>
-                                <ColumnDefinition Width="136*"/>
-                                <ColumnDefinition Width="308*"/>
-                                <ColumnDefinition Width="70*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image  Source="/D548T5.jpg"/>
+                            <Border Margin="5" Grid.Column="2" VerticalAlignment="Bottom">
+                                <Image x:Name="RedactIconImageButton" Source="/redact-icon.png" MouseDown="RedactIconImageButton_MouseDown"/>
                             </Border>
 
-                            <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="1">
-                                <TextBlock Text="Артикул:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Название:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Производитель:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Цена:" FontSize="16" Margin="0 50 0 20" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Осталось:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Text="D548T5" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Столовый сервиз" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Luminarc" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="1700,00 руб." FontSize="16" Margin="10 50 0 20" HorizontalAlignment="Left"/>
-                                <TextBlock Text="10 штук" FontSize="16" Margin="10 0 0 10" HorizontalAlignment="Left"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Border Margin="5">
-                                    <Image Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" Margin="0,0,0,20"/>
-                                </Border>
-
-                                <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" />
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="251*"/>
-                                <ColumnDefinition Width="136*"/>
-                                <ColumnDefinition Width="308*"/>
-                                <ColumnDefinition Width="70*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image  Source="/D644G3.jpg"/>
+                            <Border Margin="5" Grid.Column="2" VerticalAlignment="Bottom">
+                                <Image x:Name="DeleteIconImageButton" Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" MouseDown="DeleteIconImageButton_MouseDown"/>
                             </Border>
-
-                            <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="1">
-                                <TextBlock Text="Артикул:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Название:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Производитель:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Цена:" FontSize="16" Margin="0 50 0 20" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Осталось:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Text="D644G3" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Набор кастрюль" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Webber" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="3500,00 руб." FontSize="16" Margin="10 50 0 20" HorizontalAlignment="Left"/>
-                                <TextBlock Text="8 штук" FontSize="16" Margin="10 0 0 10" HorizontalAlignment="Left"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Border Margin="5">
-                                    <Image Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" Margin="0,0,0,20"/>
-                                </Border>
-
-                                <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" />
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="251*"/>
-                                <ColumnDefinition Width="136*"/>
-                                <ColumnDefinition Width="308*"/>
-                                <ColumnDefinition Width="70*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image  Source="/F735F5.jpg"/>
-                            </Border>
-
-                            <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="1">
-                                <TextBlock Text="Артикул:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Название:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Производитель:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Цена:" FontSize="16" Margin="0 50 0 20" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Осталось:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Text="F735F5" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Сковорода" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Нева" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="1270,00 руб." FontSize="16" Margin="10 50 0 20" HorizontalAlignment="Left"/>
-                                <TextBlock Text="4 штук" FontSize="16" Margin="10 0 0 10" HorizontalAlignment="Left"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Border Margin="5">
-                                    <Image Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" Margin="0,0,0,20"/>
-                                </Border>
-
-                                <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" />
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="251*"/>
-                                <ColumnDefinition Width="136*"/>
-                                <ColumnDefinition Width="308*"/>
-                                <ColumnDefinition Width="70*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image  Source="/F835F5.jpg"/>
-                            </Border>
-
-                            <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="1">
-                                <TextBlock Text="Артикул:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Название:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Производитель:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Цена:" FontSize="16" Margin="0 50 0 20" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Осталось:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Text="F835F5" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Набор посуды" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Solaris" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="732,00 руб." FontSize="16" Margin="10 50 0 20" HorizontalAlignment="Left"/>
-                                <TextBlock Text="9 штук" FontSize="16" Margin="10 0 0 10" HorizontalAlignment="Left"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Border Margin="5">
-                                    <Image Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" Margin="0,0,0,20"/>
-                                </Border>
-
-                                <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" />
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="251*"/>
-                                <ColumnDefinition Width="136*"/>
-                                <ColumnDefinition Width="308*"/>
-                                <ColumnDefinition Width="70*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image  Source="/F836E5.jpg"/>
-                            </Border>
-
-                            <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="1">
-                                <TextBlock Text="Артикул:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Название:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Производитель:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Цена:" FontSize="16" Margin="0 50 0 20" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Осталось:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Text="F836E5" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Набор сковородок" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Tefal" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="4600,00 руб." FontSize="16" Margin="10 50 0 20" HorizontalAlignment="Left"/>
-                                <TextBlock Text="6 штук" FontSize="16" Margin="10 0 0 10" HorizontalAlignment="Left"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Border Margin="5">
-                                    <Image Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" Margin="0,0,0,20"/>
-                                </Border>
-
-                                <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" />
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="251*"/>
-                                <ColumnDefinition Width="136*"/>
-                                <ColumnDefinition Width="308*"/>
-                                <ColumnDefinition Width="70*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image  Source="/H482Y6.jpg"/>
-                            </Border>
-
-                            <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="1">
-                                <TextBlock Text="Артикул:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Название:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Производитель:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Цена:" FontSize="16" Margin="0 50 0 20" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Осталось:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Text="H482Y6" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Столовый сервиз" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Luminarc" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="2300,00 руб." FontSize="16" Margin="10 50 0 20" HorizontalAlignment="Left"/>
-                                <TextBlock Text="12 штук" FontSize="16" Margin="10 0 0 10" HorizontalAlignment="Left"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Border Margin="5">
-                                    <Image Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" Margin="0,0,0,20"/>
-                                </Border>
-
-                                <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" />
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="251*"/>
-                                <ColumnDefinition Width="136*"/>
-                                <ColumnDefinition Width="308*"/>
-                                <ColumnDefinition Width="70*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image  Source="/N835D4.jpg"/>
-                            </Border>
-
-                            <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="1">
-                                <TextBlock Text="Артикул:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Название:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Производитель:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Цена:" FontSize="16" Margin="0 50 0 20" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Осталось:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Text="N835D4" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Набор кастрюль" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Galaxy" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="2100,00 руб." FontSize="16" Margin="10 50 0 20" HorizontalAlignment="Left"/>
-                                <TextBlock Text="5 штук" FontSize="16" Margin="10 0 0 10" HorizontalAlignment="Left"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Border Margin="5">
-                                    <Image Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" Margin="0,0,0,20"/>
-                                </Border>
-
-                                <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" />
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="251*"/>
-                                <ColumnDefinition Width="136*"/>
-                                <ColumnDefinition Width="308*"/>
-                                <ColumnDefinition Width="70*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image  Source="/N835F5.jpg"/>
-                            </Border>
-
-                            <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="1">
-                                <TextBlock Text="Артикул:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Название:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Производитель:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Цена:" FontSize="16" Margin="0 50 0 20" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Осталось:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Text="N835F5" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Кастрюля для запекания" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Tefal" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="744,00 руб." FontSize="16" Margin="10 50 0 20" HorizontalAlignment="Left"/>
-                                <TextBlock Text="13 штук" FontSize="16" Margin="10 0 0 10" HorizontalAlignment="Left"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Border Margin="5">
-                                    <Image Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" Margin="0,0,0,20"/>
-                                </Border>
-
-                                <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" />
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border Height="250" BorderBrush="#FF4B8C4F" BorderThickness="2" Margin="0 0 0 50">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="251*"/>
-                                <ColumnDefinition Width="136*"/>
-                                <ColumnDefinition Width="308*"/>
-                                <ColumnDefinition Width="70*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Margin="10,10,10,10" BorderBrush="#FF4B8C4F" BorderThickness="2">
-                                <Image  Source="/А112Т4.jpg"/>
-                            </Border>
-
-                            <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="1">
-                                <TextBlock Text="Артикул:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Название:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Производитель:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Цена:" FontSize="16" Margin="0 50 0 20" HorizontalAlignment="Right"/>
-                                <TextBlock Text="Осталось:" FontSize="16" Margin="0 0 0 10" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Text="А112Т4" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Набор кастрюль" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Webber" FontSize="16" Margin="10,0,0,10" HorizontalAlignment="Left"/>
-                                <TextBlock Text="2600,00 руб." FontSize="16" Margin="10 50 0 20" HorizontalAlignment="Left"/>
-                                <TextBlock Text="6 штук" FontSize="16" Margin="10 0 0 10" HorizontalAlignment="Left"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Border Margin="5">
-                                    <Image Source="/icon-minus-sign-of-a-line-in-horizontal-position.png" Margin="0,0,0,20"/>
-                                </Border>
-
-                                <Border Margin="5">
-                                    <Image Source="/icon-magnifier.png" />
-                                </Border>
-                            </StackPanel>
                         </Grid>
                     </Border>
                 </StackPanel>
             </ScrollViewer>
+            <TextBlock x:Name="DisplayedItemsTextBlock" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,20,0" FontSize="16"/>
         </Grid>
-        <Border Grid.Row="2" Background="#FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="150" Margin="0,0,17,0">
-            <TextBlock Text="Каталог (Администратор)" Grid.Row="2" Height="16"/>
+        <Border Grid.Row="2" Background="#FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,17,0" Height="16" Width="149">
+            <TextBlock Grid.Row="2" Height="16">Каталог (Администратор)</TextBlock>
         </Border>
-
     </Grid>
 </Window>

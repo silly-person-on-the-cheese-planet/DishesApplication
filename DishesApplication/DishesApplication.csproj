@@ -1,53 +1,60 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="D036H2.jpg" />
-    <None Remove="D548T5.jpg" />
-    <None Remove="D644G3.jpg" />
-    <None Remove="F735F5.jpg" />
-    <None Remove="F835F5.jpg" />
-    <None Remove="F836E5.jpg" />
-    <None Remove="H482Y6.jpg" />
-    <None Remove="icon-basket.png" />
-    <None Remove="icon-magnifier.png" />
-    <None Remove="icon-minus-sign-of-a-line-in-horizontal-position.png" />
-    <None Remove="icon-pencil-tool.png" />
-    <None Remove="icon-plus.png" />
-    <None Remove="icon-user-profile.png" />
-    <None Remove="logo.png" />
-    <None Remove="N835D4.jpg" />
-    <None Remove="N835F5.jpg" />
-    <None Remove="picture.png" />
-    <None Remove="А112Т4.jpg" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="D036H2.jpg" />
+		<None Remove="D548T5.jpg" />
+		<None Remove="D644G3.jpg" />
+		<None Remove="F735F5.jpg" />
+		<None Remove="F835F5.jpg" />
+		<None Remove="F836E5.jpg" />
+		<None Remove="H482Y6.jpg" />
+		<None Remove="icon-basket.png" />
+		<None Remove="icon-magnifier.png" />
+		<None Remove="icon-minus-sign-of-a-line-in-horizontal-position.png" />
+		<None Remove="icon-pencil-tool.png" />
+		<None Remove="icon-plus.png" />
+		<None Remove="icon-user-profile.png" />
+		<None Remove="logo.png" />
+		<None Remove="N835D4.jpg" />
+		<None Remove="N835F5.jpg" />
+		<None Remove="picture.png" />
+		<None Remove="redact-icon.png" />
+		<None Remove="А112Т4.jpg" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="D036H2.jpg" />
-    <Resource Include="D548T5.jpg" />
-    <Resource Include="D644G3.jpg" />
-    <Resource Include="F735F5.jpg" />
-    <Resource Include="F835F5.jpg" />
-    <Resource Include="F836E5.jpg" />
-    <Resource Include="H482Y6.jpg" />
-    <Resource Include="icon-basket.png" />
-    <Resource Include="icon-magnifier.png" />
-    <Resource Include="icon-minus-sign-of-a-line-in-horizontal-position.png" />
-    <Resource Include="icon-pencil-tool.png" />
-    <Resource Include="icon-plus.png" />
-    <Resource Include="icon-user-profile.png" />
-    <Resource Include="logo.png" />
-    <Resource Include="N835D4.jpg" />
-    <Resource Include="N835F5.jpg" />
-    <Resource Include="picture.png" />
-    <Resource Include="А112Т4.jpg" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="EntityFramework" Version="6.5.1" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="D036H2.jpg" />
+		<Resource Include="D548T5.jpg" />
+		<Resource Include="D644G3.jpg" />
+		<Resource Include="F735F5.jpg" />
+		<Resource Include="F835F5.jpg" />
+		<Resource Include="F836E5.jpg" />
+		<Resource Include="H482Y6.jpg" />
+		<Resource Include="icon-basket.png" />
+		<Resource Include="icon-magnifier.png" />
+		<Resource Include="icon-minus-sign-of-a-line-in-horizontal-position.png" />
+		<Resource Include="icon-pencil-tool.png" />
+		<Resource Include="icon-plus.png" />
+		<Resource Include="icon-user-profile.png" />
+		<Resource Include="logo.png" />
+		<Resource Include="N835D4.jpg" />
+		<Resource Include="N835F5.jpg" />
+		<Resource Include="picture.png" />
+		<Resource Include="redact-icon.png" />
+		<Resource Include="А112Т4.jpg" />
+	</ItemGroup>
 
 </Project>
