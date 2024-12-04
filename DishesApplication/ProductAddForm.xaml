@@ -80,3 +80,4 @@
         <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,5" Height="17"><Run Language="ru-ru" Text="Создание"/><Run Text=" карточки товара"/></TextBlock>
     </Grid>
 </Window>
+

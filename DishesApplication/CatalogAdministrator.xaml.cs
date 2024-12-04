@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.Data.SqlClient;
 
 namespace DishesApplication
 {
     public partial class CatalogAdministrator : Window
     {
-        private string connectionString = "Server=desktop-uijbk3u;Database=My;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;";
+        private string connectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
         private List<Product> products;
+        private List<string> manufacturers;
+        private string selectedManufacturer = "Все производители";
+        private string searchText = string.Empty;
 
         public CatalogAdministrator(string userSurname, string userName, string userPatronymic)
         {
@@ -22,6 +26,8 @@ namespace DishesApplication
             UserNameTextBlock.Text = userName;
             UserPatronymicTextBlock.Text = userPatronymic;
             LoadProducts();
+            LoadManufacturers();
+            LoadCategories();
         }
 
         private void LoadProducts()
@@ -64,12 +70,29 @@ namespace DishesApplication
                     }
 
                     DisplayProducts(products);
+                    UpdateDisplayedItemsCount(products.Count, products.Count);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
             }
+        }
+
+        private void LoadManufacturers()
+        {
+            manufacturers = products.Select(p => p.ProductManufacturer).Distinct().ToList();
+            manufacturers.Insert(0, "Все производители");
+            ManufacturerFilterComboBox.ItemsSource = manufacturers;
+            ManufacturerFilterComboBox.SelectedIndex = 0;
+        }
+
+        private void LoadCategories()
+        {
+            var categories = products.Select(p => p.ProductCategory).Distinct().ToList();
+            categories.Insert(0, "Все категории");
+            CategoryFindComboBox.ItemsSource = categories;
+            CategoryFindComboBox.SelectedIndex = 0;
         }
 
         private void DisplayProducts(List<Product> products)
@@ -182,7 +205,7 @@ namespace DishesApplication
                     FontSize = 14,
                     TextWrapping = TextWrapping.WrapWithOverflow,
                     TextTrimming = TextTrimming.CharacterEllipsis,
-                    Margin = new Thickness(0,0,0,70)
+                    Margin = new Thickness(0, 0, 0, 70)
                 };
                 Grid.SetColumn(availabilityTextBlock, 2);
                 productGrid.Children.Add(availabilityTextBlock);
@@ -223,17 +246,15 @@ namespace DishesApplication
 
         private void EditProduct(Product product)
         {
-            // Логика редактирования товара
             ProductRedactForm productRedactForm = new ProductRedactForm(product);
             if (productRedactForm.ShowDialog() == true)
             {
-                LoadProducts(); // Перезагрузка товаров после редактирования
+                LoadProducts();
             }
         }
 
         private void DeleteProduct(Product product)
         {
-            // Логика удаления товара
             if (MessageBox.Show("Вы уверены, что хотите удалить этот товар?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 try
@@ -248,7 +269,7 @@ namespace DishesApplication
                             command.ExecuteNonQuery();
                         }
                     }
-                    LoadProducts(); // Перезагрузка товаров после удаления
+                    LoadProducts();
                 }
                 catch (Exception ex)
                 {
@@ -259,8 +280,12 @@ namespace DishesApplication
 
         private void SearchProductsByDescription(string searchText)
         {
-            var filteredProducts = products.Where(p => p.ProductDescription.ToLower().Contains(searchText.ToLower())).ToList();
+            string selectedCategory = CategoryFindComboBox.SelectedItem?.ToString() ?? "Все категории";
+            var filteredProducts = products.Where(p => p.ProductDescription.ToLower().Contains(searchText.ToLower()) &&
+                                                      (selectedManufacturer == "Все производители" || p.ProductManufacturer == selectedManufacturer) &&
+                                                      (selectedCategory == "Все категории" || p.ProductCategory == selectedCategory)).ToList();
             DisplayProducts(filteredProducts);
+            UpdateDisplayedItemsCount(filteredProducts.Count, products.Count);
         }
 
         private void SearchProductsByCategory(string searchText)
@@ -268,8 +293,9 @@ namespace DishesApplication
             var categories = products.Select(p => p.ProductCategory).Distinct().ToList();
             if (categories.Contains(searchText, StringComparer.OrdinalIgnoreCase))
             {
-                var filteredProducts = products.Where(p => p.ProductCategory.ToLower().Contains(searchText.ToLower())).ToList();
+                var filteredProducts = products.Where(p => p.ProductCategory.ToLower().Contains(searchText.ToLower()) && (selectedManufacturer == "Все производители" || p.ProductManufacturer == selectedManufacturer)).ToList();
                 DisplayProducts(filteredProducts);
+                UpdateDisplayedItemsCount(filteredProducts.Count, products.Count);
             }
             else
             {
@@ -279,13 +305,19 @@ namespace DishesApplication
 
         private void SortProductsByPriceAscending()
         {
-            var sortedProducts = products.OrderBy(p => p.ProductCost).ToList();
+            string selectedCategory = CategoryFindComboBox.SelectedItem?.ToString() ?? "Все категории";
+            var sortedProducts = products.Where(p => (selectedManufacturer == "Все производители" || p.ProductManufacturer == selectedManufacturer) &&
+                                                     p.ProductDescription.ToLower().Contains(searchText.ToLower()) &&
+                                                     (selectedCategory == "Все категории" || p.ProductCategory == selectedCategory)).OrderBy(p => p.ProductCost).ToList();
             DisplayProducts(sortedProducts);
         }
 
         private void SortProductsByPriceDescending()
         {
-            var sortedProducts = products.OrderByDescending(p => p.ProductCost).ToList();
+            string selectedCategory = CategoryFindComboBox.SelectedItem?.ToString() ?? "Все категории";
+            var sortedProducts = products.Where(p => (selectedManufacturer == "Все производители" || p.ProductManufacturer == selectedManufacturer) &&
+                                                     p.ProductDescription.ToLower().Contains(searchText.ToLower()) &&
+                                                     (selectedCategory == "Все категории" || p.ProductCategory == selectedCategory)).OrderByDescending(p => p.ProductCost).ToList();
             DisplayProducts(sortedProducts);
         }
 
@@ -294,9 +326,9 @@ namespace DishesApplication
             SearchProductsByDescription(ProductFindTextBox.Text);
         }
 
-        private void CategoryFindImageButton_MouseDown(object sender, MouseButtonEventArgs e)
+        private void CategoryFindComboBox_KeyDown(object sender, KeyEventArgs e)
         {
-            SearchProductsByCategory(CategoryFindTextBox.Text);
+
         }
 
         private void ProductFindTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -304,14 +336,6 @@ namespace DishesApplication
             if (e.Key == Key.Enter)
             {
                 SearchProductsByDescription(ProductFindTextBox.Text);
-            }
-        }
-
-        private void CategoryFindTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                SearchProductsByCategory(CategoryFindTextBox.Text);
             }
         }
 
@@ -331,7 +355,9 @@ namespace DishesApplication
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            LogIn logIn = new(); logIn.Show(); Close();
+            LogIn logIn = new LogIn();
+            logIn.Show();
+            Close();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -339,24 +365,6 @@ namespace DishesApplication
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
-            }
-        }
-
-        private void CategoryFindTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (CategoryFindTextBox.Text == "Категория" && CategoryFindTextBox.Foreground == Brushes.Gray)
-            {
-                CategoryFindTextBox.Text = "";
-                CategoryFindTextBox.Foreground = Brushes.Black;
-            }
-        }
-
-        private void CategoryFindTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (CategoryFindTextBox.Text == "")
-            {
-                CategoryFindTextBox.Foreground = Brushes.Gray;
-                CategoryFindTextBox.Text = "Категория";
             }
         }
 
@@ -378,23 +386,44 @@ namespace DishesApplication
             }
         }
 
-        private void RedactIconImageButton_MouseDown(object sender, MouseButtonEventArgs e)
+        private void ManufacturerFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Логика редактирования товара
+            selectedManufacturer = ManufacturerFilterComboBox.SelectedItem as string;
+            SearchProductsByDescription(searchText);
         }
 
-        private void DeleteIconImageButton_MouseDown(object sender, MouseButtonEventArgs e)
+        private void UpdateDisplayedItemsCount(int displayedCount, int totalCount)
         {
-            // Логика удаления товара
+            DisplayedItemsTextBlock.Text = $"{displayedCount} из {totalCount}";
         }
 
         private void AddProductImageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ProductAddForm productAddForm = new();
+            ProductAddForm productAddForm = new ProductAddForm();
             if (productAddForm.ShowDialog() == true)
             {
-                LoadProducts(); // Перезагрузка товаров после добавления нового
+                LoadProducts();
             }
+        }
+
+        private void RedactIconImageButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void DeleteIconImageButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void CategoryFindComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedCategory = CategoryFindComboBox.SelectedItem?.ToString() ?? "Все категории";
+            var filteredProducts = products.Where(p => (selectedCategory == "Все категории" || p.ProductCategory == selectedCategory) &&
+                                                      (selectedManufacturer == "Все производители" || p.ProductManufacturer == selectedManufacturer) &&
+                                                      p.ProductDescription.ToLower().Contains(searchText.ToLower())).ToList();
+            DisplayProducts(filteredProducts);
+            UpdateDisplayedItemsCount(filteredProducts.Count, products.Count);
         }
     }
 }

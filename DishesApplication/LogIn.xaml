@@ -51,6 +51,7 @@
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50 0 0 0" Width="350">
                         <TextBox x:Name="UserLoginTextBox" MinWidth="350" BorderBrush="#FF4B8C4F" Margin="0 0 0 30" FontSize="20" BorderThickness="2"/>
                         <PasswordBox x:Name="UserPasswordBox" MinWidth="350" BorderBrush="#FF4B8C4F" FontSize="20" BorderThickness="2" Width="350" Margin="0 0 0 30"/>
+                        <TextBox x:Name="UserPasswordTextBoxReadOnly" MinWidth="350" BorderBrush="#FF4B8C4F" FontSize="20" BorderThickness="2" Width="350" Margin="0 0 0 30" Visibility="Collapsed" IsReadOnly="True"/>
                         <StackPanel Orientation="Horizontal" >
                             <TextBox x:Name="CaptchaTextBox" VerticalContentAlignment="Center" MinWidth="150" BorderBrush="#FF4B8C4F" FontSize="20" BorderThickness="2" Visibility="Collapsed" Margin="0 0 10 0"/>
                             <Border x:Name="CaptchaBorder" Grid.Row="2" BorderBrush="#FF4B8C4F" BorderThickness="2" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">

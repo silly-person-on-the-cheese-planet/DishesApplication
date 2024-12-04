@@ -80,3 +80,4 @@
         <TextBlock Text="Редактирование карточки товара" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,5" Height="17"/>
     </Grid>
 </Window>
+

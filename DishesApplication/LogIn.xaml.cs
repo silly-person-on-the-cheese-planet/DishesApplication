@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -6,13 +8,12 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Microsoft.Data.SqlClient;
 
 namespace DishesApplication
 {
     public partial class LogIn : Window
     {
-        private string connectionString = "Server=desktop-uijbk3u;Database=My;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;";
+        private string connectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
         private bool captchaRequired = false;
         private string captchaText;
 
@@ -39,7 +40,7 @@ namespace DishesApplication
                 if (CaptchaTextBox.Text != captchaText)
                 {
                     MessageBox.Show("Неверная CAPTCHA. Ожидалось: " + captchaText, "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
-                    await Task.Delay(10000); // Блокировка на 10 секунд
+                    await LockInputFields(10000); // Блокировка на 10 секунд
                     return;
                 }
             }
@@ -66,9 +67,32 @@ namespace DishesApplication
                 else
                 {
                     MessageBox.Show("Неверный логин или пароль.", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
-                    await Task.Delay(10000); // Блокировка на 10 секунд
+                    await LockInputFields(10000); // Блокировка на 10 секунд
                 }
             }
+        }
+
+        private async Task LockInputFields(int delayMillis)
+        {
+            UserLoginTextBox.Background = Brushes.LightGray;
+            UserPasswordBox.Background = Brushes.LightGray;
+            CaptchaTextBox.Background = Brushes.LightGray;
+            UserLoginTextBox.Text = "";
+            UserPasswordBox.Password = "";
+            CaptchaTextBox.Text = "";
+            UserLoginTextBox.IsReadOnly = true;
+            UserPasswordBox.Visibility = Visibility.Collapsed;
+            UserPasswordTextBoxReadOnly.Visibility = Visibility.Visible;
+            UserPasswordTextBoxReadOnly.Text = UserPasswordBox.Password;
+            CaptchaTextBox.IsReadOnly = true;
+            await Task.Delay(delayMillis);
+            UserLoginTextBox.Background = Brushes.White;
+            UserPasswordBox.Background = Brushes.White;
+            CaptchaTextBox.Background = Brushes.White;
+            UserLoginTextBox.IsReadOnly = false;
+            UserPasswordBox.Visibility = Visibility.Visible;
+            UserPasswordTextBoxReadOnly.Visibility = Visibility.Collapsed;
+            CaptchaTextBox.IsReadOnly = false;
         }
 
         private bool AuthenticateUser(string login, string password)

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -9,12 +11,13 @@ namespace DishesApplication
 {
     public partial class ProductAddForm : Window
     {
-        private string connectionString = "Server=desktop-uijbk3u;Database=My;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;";
+        private string connectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
         private string productPhotoPath;
 
         public ProductAddForm()
         {
             InitializeComponent();
+            productPhotoPath = "/picture.png";
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -30,9 +33,9 @@ namespace DishesApplication
             DialogResult = false;
         }
 
-        private void RegButton_Click(object sender, RoutedEventArgs e)
+        private async void RegButton_Click(object sender, RoutedEventArgs e)
         {
-            if (AddProductToDatabase())
+            if (await AddProductToDatabaseAsync())
             {
                 MessageBox.Show("Товар успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
@@ -59,13 +62,13 @@ namespace DishesApplication
             }
         }
 
-        private bool AddProductToDatabase()
+        private async Task<bool> AddProductToDatabaseAsync()
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    connection.Open();
+                    await connection.OpenAsync();
                     string query = "INSERT INTO [dbo].[Product] ([ProductArticleNumber], [ProductName], [ProductDescription], [ProductCategory], [ProductPhoto], [ProductManufacturer], [ProductCost], [ProductDiscountAmount], [ProductQuantityInStock], [ProductStatus]) " +
                                    "VALUES (@ProductArticleNumber, @ProductName, @ProductDescription, @ProductCategory, @ProductPhoto, @ProductManufacturer, @ProductCost, @ProductDiscountAmount, @ProductQuantityInStock, @ProductStatus)";
 
@@ -82,7 +85,7 @@ namespace DishesApplication
                         command.Parameters.AddWithValue("@ProductQuantityInStock", int.Parse(ProductQuantityInStockTextBox.Text));
                         command.Parameters.AddWithValue("@ProductStatus", "Да"); // Assuming the product is available
 
-                        command.ExecuteNonQuery();
+                        await command.ExecuteNonQueryAsync();
                     }
                 }
                 return true;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -9,7 +10,7 @@ namespace DishesApplication
 {
     public partial class ProductRedactForm : Window
     {
-        private string connectionString = "Server=desktop-uijbk3u;Database=My;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;";
+        private string connectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
         private string productPhotoPath;
         private Product product;
 
@@ -93,9 +94,9 @@ namespace DishesApplication
                         command.Parameters.AddWithValue("@ProductPhoto", productPhotoPath);
                         command.Parameters.AddWithValue("@ProductManufacturer", ProductManufacturerTextBox.Text);
                         command.Parameters.AddWithValue("@ProductCost", decimal.Parse(ProductCostTextBox.Text));
-                        command.Parameters.AddWithValue("@ProductDiscountAmount", 0); // Set discount amount to 0
+                        command.Parameters.AddWithValue("@ProductDiscountAmount", 0);
                         command.Parameters.AddWithValue("@ProductQuantityInStock", int.Parse(ProductQuantityInStockTextBox.Text));
-                        command.Parameters.AddWithValue("@ProductStatus", "Да"); // Assuming the product is available
+                        command.Parameters.AddWithValue("@ProductStatus", "Да");
 
                         command.ExecuteNonQuery();
                     }
