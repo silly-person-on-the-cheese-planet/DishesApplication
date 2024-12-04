@@ -53,7 +53,9 @@
 		<Resource Include="icon-plus.png" />
 		<Resource Include="icon-quit.png" />
 		<Resource Include="icon-user-profile.png" />
-		<Resource Include="logo.png" />
+		<Resource Include="logo.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="N835D4.jpg" />
 		<Resource Include="N835F5.jpg" />
 		<Resource Include="picture.png" />

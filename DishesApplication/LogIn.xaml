@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DishesApplication"
         mc:Ignorable="d"
-        Title="LogIn" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown" KeyDown="Window_KeyDown">
+        Title="LogIn" Height="550" Width="800" FontFamily="Comic Sans MS" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="800" MinHeight="550" MouseDown="Window_MouseDown" KeyDown="Window_KeyDown" Icon="{StaticResource AppIcon}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="13*"/>

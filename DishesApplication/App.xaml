@@ -5,6 +5,8 @@
              StartupUri="LogIn.xaml"
              ShutdownMode="OnLastWindowClose">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <BitmapImage x:Key="AppIcon" UriSource="logo.png" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

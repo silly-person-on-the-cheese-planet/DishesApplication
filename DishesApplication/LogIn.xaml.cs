@@ -75,7 +75,7 @@ namespace DishesApplication
         private async Task LockInputFields(int delayMillis)
         {
             UserLoginTextBox.Background = Brushes.LightGray;
-            UserPasswordBox.Background = Brushes.LightGray;
+            UserPasswordTextBoxReadOnly.Background = Brushes.LightGray;
             CaptchaTextBox.Background = Brushes.LightGray;
             UserLoginTextBox.Text = "";
             UserPasswordBox.Password = "";
@@ -87,7 +87,7 @@ namespace DishesApplication
             CaptchaTextBox.IsReadOnly = true;
             await Task.Delay(delayMillis);
             UserLoginTextBox.Background = Brushes.White;
-            UserPasswordBox.Background = Brushes.White;
+            UserPasswordTextBoxReadOnly.Background = Brushes.White;
             CaptchaTextBox.Background = Brushes.White;
             UserLoginTextBox.IsReadOnly = false;
             UserPasswordBox.Visibility = Visibility.Visible;
