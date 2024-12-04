@@ -21,6 +21,7 @@
 		<None Remove="icon-minus-sign-of-a-line-in-horizontal-position.png" />
 		<None Remove="icon-pencil-tool.png" />
 		<None Remove="icon-plus.png" />
+		<None Remove="icon-quit.png" />
 		<None Remove="icon-user-profile.png" />
 		<None Remove="logo.png" />
 		<None Remove="N835D4.jpg" />
@@ -50,6 +51,7 @@
 		<Resource Include="icon-minus-sign-of-a-line-in-horizontal-position.png" />
 		<Resource Include="icon-pencil-tool.png" />
 		<Resource Include="icon-plus.png" />
+		<Resource Include="icon-quit.png" />
 		<Resource Include="icon-user-profile.png" />
 		<Resource Include="logo.png" />
 		<Resource Include="N835D4.jpg" />

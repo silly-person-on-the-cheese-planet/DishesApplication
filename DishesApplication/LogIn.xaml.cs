@@ -297,5 +297,33 @@ namespace DishesApplication
                 CaptchaCanvas.Children.Add(line);
             }
         }
+
+        private void QuitImageButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Показать MessageBox для подтверждения выхода
+            MessageBoxResult result = MessageBox.Show("Вы действительно хотите выйти?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            // Если пользователь нажал "Да", закрыть приложение
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Проверить, была ли нажата клавиша Esc
+            if (e.Key == Key.Escape)
+            {
+                // Показать MessageBox для подтверждения выхода
+                MessageBoxResult result = MessageBox.Show("Вы действительно хотите выйти?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                // Если пользователь нажал "Да", закрыть приложение
+                if (result == MessageBoxResult.Yes)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+        }
     }
 }
